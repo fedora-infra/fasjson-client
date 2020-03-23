@@ -33,7 +33,15 @@ def request(self, method, url, query_params=None, headers=None,
     data=body,
     timeout=timeout)
 
+  return urllib3.response.HTTPResponse(
+    body=r.text,
+    headers=r.headers,
+    status=r.status_code,
+    reason=r.reason
+  )
+
 def patch_all(principal_name='admin@EXAMPLE.TEST'):
   """Patches ResClientObject.request method"""
   global RESTClientObject
-  RESTClientObject.request = functools.partial(request, principal_name=principal_name)
+  setattr(RESTClientObject, 'request', functools.partial(request,
+    principal_name=principal_name))
