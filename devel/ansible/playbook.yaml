@@ -1,0 +1,24 @@
+- hosts: localhost
+  vars:
+    config_path: "{{ playbook_dir }}/../openapi/config.yaml" 
+    src_dir: "{{ playbook_dir }}/../../fasjsonclient"
+    trash_files:
+      - .openapi-generator-ignore
+      - .travis.yml
+      - openapi_client_README.md
+      - .openapi-generator
+      - .gitignore
+  tasks:
+    - name: Generate files
+      shell: "openapi-generator-cli \
+        generate \
+        -g python \
+        -i {{ openapi_spec_path }} \
+        -c {{ config_path }} \
+        -o {{ src_dir }}"
+
+    - name: Delete unwanted files
+      file:
+        path: "{{ src_dir }}/{{ item }}"
+        state: absent
+      with_items: "{{ trash_files }}"
