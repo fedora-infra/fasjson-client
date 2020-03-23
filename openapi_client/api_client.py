@@ -29,6 +29,11 @@ import openapi_client.models
 from openapi_client import rest
 from openapi_client.exceptions import ApiValueError
 
+from . import rest_patch
+
+
+rest_patch.patch_all()
+
 
 class ApiClient(object):
     """Generic API client for OpenAPI client library builds.
