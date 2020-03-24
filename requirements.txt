@@ -1,6 +1,7 @@
-certifi >= 14.05.14
-future; python_version<="2.7"
-six >= 1.10
-python_dateutil >= 2.5.3
-setuptools >= 21.0.0
-urllib3 >= 1.15.1
+urllib3 >= 1.25.8
+six >= 1.14.0
+certifi==2019.11.28
+python-dateutil==2.8.1
+gssapi==1.6.2
+requests==2.23.0
+requests-gssapi==1.2.0

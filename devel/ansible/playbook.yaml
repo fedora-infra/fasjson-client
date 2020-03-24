@@ -10,12 +10,17 @@
       - .gitignore
   tasks:
     - name: Generate files
-      shell: "openapi-generator-cli \
-        generate \
-        -g python \
-        -i {{ openapi_spec_path }} \
-        -c {{ config_path }} \
-        -o {{ src_dir }}"
+      openapi_gen:
+        kind: python
+        spec: "{{ openapi_spec_path }}"
+        config: "{{ config_path }}"
+        dest: "{{ src_dir }}"
+      # shell: "openapi-generator-cli \
+      #   generate \
+      #   -g python \
+      #   -i {{ openapi_spec_path }} \
+      #   -c {{ config_path }} \
+      #   -o {{ src_dir }}"
 
     - name: Delete unwanted files
       file:
