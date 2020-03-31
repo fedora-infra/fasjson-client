@@ -1,0 +1,208 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "license": {
+      "name": "GPLv3",
+      "url": "https://www.gnu.org/licenses/quick-guide-gplv3.en.html"
+    },
+    "title": "Fedora Account Service JSON API",
+    "version": "0.0.1"
+  },
+  "host": "fasjson.example.test",
+  "basePath": "/fasjson",
+  "schemes": ["http"],
+  "paths": {
+    "/v1/me": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "requester identity info",
+            "schema": {
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/identity"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "properties": {
+                "error": {
+                  "$ref": "#/definitions/error"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "operationId": "whoami"
+      }
+    }
+  },
+  "definitions": {
+    "error": {
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "data": {
+          "type": "object"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object"
+    },
+    "group": {
+      "properties": {
+        "cn": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "group_page": {
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/groups"
+        },
+        "pagination": {
+          "properties": {
+            "current": {
+              "type": "integer"
+            },
+            "next": {
+              "type": "integer"
+            },
+            "previous": {
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "groups": {
+      "items": {
+        "$ref": "#/definitions/group"
+      },
+      "type": "array"
+    },
+    "identity": {
+      "properties": {
+        "info": {
+          "type": "object"
+        },
+        "raw": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "user": {
+      "properties": {
+        "creationts": {
+          "type": "string"
+        },
+        "givenname": {
+          "type": "string"
+        },
+        "gpgkeyids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "ircnick": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "locked": {
+          "type": "boolean"
+        },
+        "login": {
+          "type": "string"
+        },
+        "mails": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "timezone": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "user_ref": {
+      "properties": {
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "user_ref_list": {
+      "items": {
+        "$ref": "#/definitions/user_ref"
+      },
+      "type": "array"
+    },
+    "user_ref_page": {
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/user_ref_list"
+        },
+        "pagination": {
+          "properties": {
+            "current": {
+              "type": "integer"
+            },
+            "next": {
+              "type": "integer"
+            },
+            "previous": {
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "x-components": {
+    "responses": {
+      "Error": {
+        "description": "unexpected error",
+        "schema": {
+          "properties": {
+            "error": {
+              "$ref": "#/definitions/error"
+            }
+          },
+          "type": "object"
+        }
+      }
+    }
+  }
+}
