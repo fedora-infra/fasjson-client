@@ -1,0 +1,20 @@
+blinker
+coverage
+flake8
+pytest
+pytest-cov
+pytest-mock
+vcrpy
+unittest2
+mock
+
+# Authentication integration testing
+requests
+requests-mock
+
+# required by vcs looks like
+contextlib2
+
+# Required to test building the docs
+sphinx
+sphinxcontrib-httpdomain

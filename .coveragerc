@@ -1,0 +1,14 @@
+[run]
+branch = True
+include =
+    fasjson_client/*
+
+
+[report]
+fail_under = 88
+precision = 2
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+omit =
+    fasjson_client/tests/*
