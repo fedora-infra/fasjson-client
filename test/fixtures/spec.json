@@ -9,10 +9,10 @@
     "version": "0.0.1"
   },
   "host": "fasjson.example.test",
-  "basePath": "/fasjson",
+  "basePath": "/fasjson/v1",
   "schemes": ["http"],
   "paths": {
-    "/v1/me": {
+    "/me": {
       "get": {
         "produces": [
           "application/json"
