@@ -14,6 +14,10 @@ def content(path, cwd=None):
         return fd.read()
 
 
+def parse_requirements(data):
+    return [l for l in data.split('\n') if l and not l.startswith('#')]
+
+
 setup(
     name="fasjson-client",
     author="Fedora Infrastructure Team",
@@ -35,7 +39,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     license="LGPLv3",
-    install_requires=content('requirements.txt').split('\n'),
-    tests_requires=content('test_requirements.txt').split('\n'),
+    install_requires=parse_requirements(content('requirements.txt')),
+    tests_requires=parse_requirements(content('test_requirements.txt')),
     python_requires=">=3.6",
 )
