@@ -5,7 +5,7 @@ include =
 
 
 [report]
-fail_under = 88
+fail_under = 100
 precision = 2
 exclude_lines =
     pragma: no cover
