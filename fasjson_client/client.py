@@ -62,8 +62,11 @@ class Client:
         http_client=self.http_client,
         config={"disable_fallback_results": True},
       )
-    except SwaggerValidationError:
-      raise errors.ClientError("schema validation failed", errno.EPROTO)
+    except SwaggerValidationError as e:
+      data = {
+        'exc': e
+      }
+      raise errors.ClientError("schema validation failed", errno.EPROTO, data=data)
 
   @classmethod
   def from_url(cls, spec_url, base_url=None, principal=None):
