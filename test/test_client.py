@@ -5,6 +5,7 @@ import jsonschema
 import pytest
 import requests
 import requests_mock
+from swagger_spec_validator.common import SwaggerValidationError
 
 from fasjson_client.client import Client
 from fasjson_client import errors
@@ -26,9 +27,8 @@ def test_client_from_spec_error(fixture_dir):
     err = e.value
 
     assert "schema validation failed" == str(err)
-    assert "<ClientError code=71 message=schema validation failed data=None>" == repr(
-        err
-    )
+    assert SwaggerValidationError == type(err.data['exc'])
+    assert True == repr(err).startswith("<ClientError code=71 message=schema validation failed")
 
 
 def test_client_from_url(fixture_dir):
