@@ -9,7 +9,7 @@ from bravado.client import SwaggerClient
 import gssapi
 from swagger_spec_validator.common import SwaggerValidationError
 
-from . import errors
+from . import errors, const
 
 
 class HttpClient(requests_client.RequestsClient):
@@ -69,7 +69,7 @@ class Client:
       raise errors.ClientError("schema validation failed", errno.EPROTO, data=data)
 
   @classmethod
-  def from_url(cls, spec_url, base_url=None, principal=None):
+  def from_url(cls, spec_url=const.SPEC_URL, base_url=None, principal=None):
     """
     Builds a client object from a remote spec file definition.
     """
