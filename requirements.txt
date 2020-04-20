@@ -1,5 +1,0 @@
-pyaml
-gssapi
-bravado
-requests-gssapi
-requests
