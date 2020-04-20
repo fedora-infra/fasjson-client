@@ -1,12 +1,12 @@
 import errno
 from urllib.parse import urlparse
 
+import gssapi
 import yaml
 import requests
 from requests_gssapi import HTTPSPNEGOAuth
 from bravado import requests_client
 from bravado.client import SwaggerClient
-import gssapi
 from swagger_spec_validator.common import SwaggerValidationError
 
 from . import errors, const

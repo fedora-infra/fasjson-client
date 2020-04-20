@@ -10,4 +10,4 @@ def test_dir():
 
 @pytest.fixture
 def fixture_dir(test_dir):
-    return f"{test_dir}/fixtures"
+    return os.path.join(test_dir, "fixtures")
