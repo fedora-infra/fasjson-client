@@ -1,4 +1,5 @@
 import json
+import sys
 import types
 
 import pytest
@@ -71,7 +72,7 @@ def test_api_auth_error(fixture_dir):
             '<bound method GSSError.gen_message of GSSError("Major (851968): '
             "Unspecified GSS failure.  Minor code may provide more information, "
             "Minor (2529639053): Can't find client principal admin@EXAMPLE.TEST "
-            'in cache collection",)>'
+            f'in cache collection"{"," if sys.version_info < (3, 7, 0) else ""})>'
         ),
         "codes": {
             "maj": 851968,
