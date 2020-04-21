@@ -48,6 +48,7 @@ sphinx = "^3.0.2"
 sphinxcontrib-httpdomain = "^1.7.0"
 bandit = "^1.6.2"
 liccheck = "^0.4.2"
+black = "^19.10b0"
 
 
 [tool.liccheck]
