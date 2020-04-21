@@ -14,7 +14,10 @@ class BaseError(Exception):
     String representation of the class for debugging purposes,
     returned when using the repr function.
     """
-        return f"<{self.__class__.__name__} code={self.code} message={self.message} data={self.data}>"
+        return (
+            f"<{self.__class__.__name__} code={self.code} "
+            f"message={self.message} data={self.data}>"
+        )
 
     def __str__(self):
         """

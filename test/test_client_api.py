@@ -1,11 +1,8 @@
 import json
 import types
 
-import bravado
 import pytest
-import requests
 import requests_mock
-import gssapi
 
 from fasjson_client.client import Client
 from fasjson_client import errors
@@ -70,7 +67,12 @@ def test_api_auth_error(fixture_dir):
         c.me.whoami().response().result
     err = e.value
     expected = {
-        "trace": '<bound method GSSError.gen_message of GSSError("Major (851968): Unspecified GSS failure.  Minor code may provide more information, Minor (2529639053): Can\'t find client principal admin@EXAMPLE.TEST in cache collection",)>',
+        "trace": (
+            '<bound method GSSError.gen_message of GSSError("Major (851968): '
+            "Unspecified GSS failure.  Minor code may provide more information, "
+            "Minor (2529639053): Can't find client principal admin@EXAMPLE.TEST "
+            'in cache collection",)>'
+        ),
         "codes": {
             "maj": 851968,
             "min": 2529639053,
