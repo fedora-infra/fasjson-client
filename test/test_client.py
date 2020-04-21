@@ -27,8 +27,10 @@ def test_client_from_spec_error(fixture_dir):
     err = e.value
 
     assert "schema validation failed" == str(err)
-    assert SwaggerValidationError == type(err.data['exc'])
-    assert True == repr(err).startswith("<ClientError code=71 message=schema validation failed")
+    assert SwaggerValidationError == type(err.data["exc"])
+    assert True == repr(err).startswith(
+        "<ClientError code=71 message=schema validation failed"
+    )
 
 
 def test_client_from_url(fixture_dir):
