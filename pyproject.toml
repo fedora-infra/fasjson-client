@@ -46,6 +46,8 @@ mock = "^4.0.2"
 requests-mock = "^1.7.0"
 sphinx = "^3.0.2"
 sphinxcontrib-httpdomain = "^1.7.0"
+bandit = "^1.6.2"
+liccheck = "^0.4.2"
 
 
 [tool.liccheck]
@@ -68,6 +70,10 @@ authorized_licenses = [
   "zpl 2.1",
   "mpl-2.0",
   "lgpl",
+  "wtfpl",
+  "GNU GPLv3+",
+  "GNU General Public License v3 (GPLv3)",
+  "Apache License, Version 2.0",
 ]
 
 [build-system]
