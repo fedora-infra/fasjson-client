@@ -65,6 +65,25 @@ def test_client_from_url_conn_error(fixture_dir):
     assert {"trace": "ConnectTimeout()"} == err.data
 
 
+def test_client_from_url_conn_error_with_request(fixture_dir):
+    with open(f"{fixture_dir}/spec.json"), requests_mock.mock() as m, pytest.raises(
+        errors.ClientError
+    ) as e:
+
+        def text_cb(request, context):
+            raise requests.exceptions.ConnectTimeout(request=request)
+
+        m.get("http://myspec.com", text=text_cb)
+        Client.from_url("http://myspec.com")
+    err = e.value
+
+    assert "error loading remote spec data" == str(err)
+    assert {
+        "trace": "ConnectTimeout()",
+        "request": {"method": "GET", "url": "http://myspec.com/"},
+    } == err.data
+
+
 def test_client_from_url_response_error(fixture_dir):
     with open(f"{fixture_dir}/spec.json"), requests_mock.mock() as m, pytest.raises(
         errors.ClientError
