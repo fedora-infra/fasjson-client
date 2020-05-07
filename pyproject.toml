@@ -27,22 +27,17 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.6"
-pyaml = "^20.4.0"
 gssapi = "^1.6.5"
 bravado = "^10.6.0"
 requests = "^2.23.0"
 requests-gssapi = "^1.2.1"
 
 [tool.poetry.dev-dependencies]
-blinker = "^1.4"
 coverage = "^5.1"
 flake8 = "^3.7.9"
 pytest = "^5.4.1"
 pytest-cov = "^2.8.1"
 pytest-mock = "^3.1.0"
-vcrpy = "^4.0.2"
-unittest2 = "^1.1.0"
-mock = "^4.0.2"
 requests-mock = "^1.7.0"
 sphinx = "^3.0.2"
 sphinxcontrib-httpdomain = "^1.7.0"
