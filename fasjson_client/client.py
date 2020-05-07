@@ -1,113 +1,56 @@
 import errno
-from urllib.parse import urlparse
+from urllib.parse import urljoin
 
-import gssapi
-import yaml
-import requests
-from requests_gssapi import HTTPSPNEGOAuth
-from bravado import requests_client
+from requests.exceptions import RequestException
 from bravado.client import SwaggerClient
+from bravado.exception import HTTPError
 from swagger_spec_validator.common import SwaggerValidationError
 
-from . import errors, const
-
-
-class HttpClient(requests_client.RequestsClient):
-    """HttpClient class used in SwaggerClient for gssapi authentication."""
-
-    def __init__(self, principal, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.principal = principal
-
-    def authenticated_request(self, request_params):
-        """
-        Retrieves an authentication token from kerberos
-        and adds it in the http header request.
-        """
-        name = gssapi.Name(self.principal, gssapi.NameType.kerberos_principal)
-        try:
-            creds = gssapi.Credentials(name=name, usage="initiate")
-        except gssapi.raw.misc.GSSError as e:
-            data = {
-                "trace": repr(e.gen_message),
-                "codes": {
-                    "maj": e.maj_code,
-                    "min": e.min_code,
-                    "routine": e.routine_code,
-                    "supplementary_code": e.supplementary_code,
-                },
-            }
-            raise errors.ClientError(
-                "schema validation failed", errno.EPROTO, data=data
-            )
-
-        request_params["auth"] = HTTPSPNEGOAuth(creds=creds)
-
-        return super().authenticated_request(request_params)
+from .gss_http import GssapiHttpClient
+from .errors import ClientError
 
 
 class Client:
-    """FasJsonClient client class that builds API methods based on openapi specs."""
+    """FASJSON client class that builds API methods based on openapi specs."""
 
-    def __init__(self, spec, principal):
-        self.principal = principal
-        self.http_client = HttpClient(principal)
+    def __init__(self, url, principal=None, api_version=1, bravado_config=None):
+        self._base_url = url
+        if not self._base_url.endswith("/"):
+            self._base_url += "/"
+        self._principal = principal
+        self._api_version = api_version
+        self._bravado_config = bravado_config or {}
+        # self._bravado_config.setdefault("disable_fallback_results", True)
+        self._api = self._make_bravado_client()
+
+    @property
+    def _spec_url(self):
+        return urljoin(self._base_url, f"specs/v{self._api_version}.json")
+
+    def _make_bravado_client(self):
+        http_client = GssapiHttpClient(principal=self._principal)
         try:
-            self._api = SwaggerClient.from_spec(
-                spec,
-                http_client=self.http_client,
-                config={"disable_fallback_results": True},
+            api = SwaggerClient.from_url(
+                self._spec_url, http_client=http_client, config=self._bravado_config,
+            )
+        except (HTTPError, RequestException) as e:
+            data = {
+                "exc": e,
+                "message": str(e),
+            }
+            if getattr(e, "status_code", None):
+                data["status_code"] = e.status_code
+            raise ClientError(
+                "error loading remote spec", errno.ECONNABORTED, data=data
             )
         except SwaggerValidationError as e:
-            data = {"exc": e}
-            raise errors.ClientError(
-                "schema validation failed", errno.EPROTO, data=data
+            raise ClientError("schema validation failed", errno.EPROTO, data={"exc": e})
+        except ValueError as e:
+            raise ClientError(
+                "remote data validation failed", errno.EPROTO, data={"exc": e}
             )
 
-    @classmethod
-    def from_url(cls, spec_url=const.SPEC_URL, base_url=None, principal=None):
-        """Builds a client object from a remote spec file definition."""
-        try:
-            res = requests.get(spec_url)
-        except requests.exceptions.RequestException as e:
-            data = {
-                "trace": e.args[0] if len(e.args) > 0 else repr(e),
-            }
-            if e.request:
-                data["request"] = {"url": e.request.url, "method": "GET"}
-            raise errors.ClientError(
-                "error loading remote spec data", errno.ECONNABORTED, data=data
-            )
-
-        if not res.ok:
-            data = {"url": res.url, "method": "GET", "status_code": res.status_code}
-            raise errors.ClientError(
-                "error loading remote spec data", errno.ECONNABORTED, data=data
-            )
-
-        try:
-            data = yaml.load(res.text, Loader=yaml.SafeLoader)
-        except yaml.parser.ParserError:
-            raise errors.ClientError("remote data validation failed", errno.EPROTO)
-
-        return cls.from_spec(data, base_url=base_url, principal=principal)
-
-    @classmethod
-    def from_spec(cls, spec_data, base_url=None, principal=None):
-        """Builds a client object from a spec definition string."""
-        if base_url:
-            parsed = urlparse(base_url)
-            if not parsed.netloc or not parsed.scheme:
-                data = {"base_url": base_url}
-                raise errors.ClientError(
-                    f"unable to parse base_url: {base_url}", errno.EPROTO, data=data
-                )
-
-            spec_data["host"] = parsed.netloc
-            spec_data["basePath"] = parsed.path
-            spec_data["schemes"] = [parsed.scheme]
-
-        return cls(spec_data, principal=principal)
+        return api
 
     def __getattr__(self, name):
         return getattr(self._api, name)
