@@ -64,7 +64,9 @@ class Client:
             if getattr(e, "status_code", None):
                 data["status_code"] = e.status_code
             raise ClientSetupError(
-                "error loading remote spec", errno.ECONNABORTED, data=data
+                "error loading remote spec, are you sure this is the URL to a FASJSON instance?",
+                errno.ECONNABORTED,
+                data=data,
             )
         except SwaggerValidationError as e:
             raise ClientSetupError(

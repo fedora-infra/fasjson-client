@@ -18,7 +18,10 @@ def test_client_wrong_url(mocker):
         m.get("http://example.com/specs/v1.json", status_code=404, reason="Not Found")
         Client("http://example.com/")
     err = e.value
-    assert "error loading remote spec" == str(err)
+    expected_msg = (
+        "error loading remote spec, are you sure this is the URL to a FASJSON instance?"
+    )
+    assert str(err) == expected_msg
     assert err.data["message"] == "404 Not Found"
 
 
@@ -54,7 +57,10 @@ def test_client_conn_error(mocker):
         Client("http://example.com")
     err = e.value
 
-    assert "error loading remote spec" == str(err)
+    expected_msg = (
+        "error loading remote spec, are you sure this is the URL to a FASJSON instance?"
+    )
+    assert str(err) == expected_msg
 
 
 def test_client_response_error(mocker):
@@ -64,6 +70,9 @@ def test_client_response_error(mocker):
         Client("http://example.com")
     err = e.value
 
-    assert "error loading remote spec" == str(err)
+    expected_msg = (
+        "error loading remote spec, are you sure this is the URL to a FASJSON instance?"
+    )
+    assert str(err) == expected_msg
     assert err.data["status_code"] == 403
     assert err.data["message"] == "403 Forbidden"
