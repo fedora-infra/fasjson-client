@@ -97,3 +97,11 @@ which return the same class of objects::
 
    >>> response.next_page().result
    [{'username': 'user3', [...]}, {'username': 'user4', [...]}]
+
+
+Command line
+------------
+
+This package also provides a command-line client to do some operations.
+Install the dependencies with ``poetry install -E cli`` and run ``fasjson-client --help``
+to see which operations are available.

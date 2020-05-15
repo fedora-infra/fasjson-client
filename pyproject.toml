@@ -31,6 +31,8 @@ gssapi = "^1.6.5"
 bravado = "^10.6.0"
 requests = "^2.23.0"
 requests-gssapi = "^1.2.1"
+cryptography = {version = "^2.9.2", optional = true}
+click = {version = "^7.1.2", optional = true}
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.1"
@@ -44,6 +46,12 @@ sphinxcontrib-httpdomain = "^1.7.0"
 bandit = "^1.6.2"
 liccheck = "^0.4.2"
 black = "^19.10b0"
+
+[tool.poetry.extras]
+cli = ["click", "cryptography"]
+
+[tool.poetry.scripts]
+fasjson-client = 'fasjson_client.cli:cli'
 
 
 [tool.liccheck]
