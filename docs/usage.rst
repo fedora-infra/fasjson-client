@@ -5,8 +5,8 @@ Instantiate the client with the FASJSON URL you want to use::
 
    >>> from fasjson_client import Client
    >>> c = Client('http://fasjson.example.com')
-   >>> c.me.whoami().response().result
-   {'result': {'dn': 'uid=admin,cn=users,cn=accounts,dc=example,dc=test', 'username': 'admin', 'service': None, 'uri': 'http://fasjson.example.test/fasjson/v1/users/admin/'}}
+   >>> c.whoami().result
+   {'dn': 'uid=admin,cn=users,cn=accounts,dc=example,dc=test', 'username': 'admin', 'service': None, 'uri': 'http://fasjson.example.test/fasjson/v1/users/admin/'}
 
 
 Authentication
@@ -74,3 +74,26 @@ For example::
     Environment=GSS_USE_PROXY=yes
 
 Your service should now be able to authenticate with Kerberos
+
+
+Pagination
+----------
+
+Some operations can be paginated::
+
+   >>> from fasjson_client import Client
+   >>> c = Client('http://fasjson.example.com')
+   >>> response = c.list_users(page_size=2)
+   >>> response.result
+   [{'username': 'user1', [...]}, {'username': 'user2', [...]}]
+
+The pagination data is available in the ``page`` property::
+
+   >>> response.page
+   {'total_results': 52, 'page_size': 2, 'page_number': 1, 'total_pages': 26}
+
+Next and previous pages are available with the ``next_page()`` and ``prev_page()`` methods,
+which return the same class of objects::
+
+   >>> response.next_page().result
+   [{'username': 'user3', [...]}, {'username': 'user4', [...]}]
