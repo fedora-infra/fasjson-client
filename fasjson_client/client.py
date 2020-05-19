@@ -1,12 +1,13 @@
 import errno
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlsplit
 
 from requests.exceptions import RequestException
 from bravado.client import SwaggerClient
+from bravado import requests_client
 from bravado.exception import HTTPError
 from swagger_spec_validator.common import SwaggerValidationError
 
-from .gss_http import GssapiHttpClient
+from .gss_http import GssapiAuthenticator
 from .errors import ClientError
 
 
@@ -28,7 +29,11 @@ class Client:
         return urljoin(self._base_url, f"specs/v{self._api_version}.json")
 
     def _make_bravado_client(self):
-        http_client = GssapiHttpClient(principal=self._principal)
+        http_client = requests_client.RequestsClient()
+        server_hostname = urlsplit(self._base_url).netloc
+        http_client.authenticator = GssapiAuthenticator(
+            server_hostname, principal=self._principal
+        )
         try:
             api = SwaggerClient.from_url(
                 self._spec_url, http_client=http_client, config=self._bravado_config,

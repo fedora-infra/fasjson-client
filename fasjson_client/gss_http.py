@@ -7,12 +7,16 @@ from bravado import requests_client
 from .errors import ClientError
 
 
-class GssapiHttpClient(requests_client.RequestsClient):
+class GssapiAuthenticator(requests_client.Authenticator):
     """HTTP client class used in SwaggerClient for GSSAPI authentication."""
 
-    def __init__(self, *args, principal=None, **kwargs):
+    def __init__(self, host, principal=None):
+        super().__init__(host)
         self.principal = principal
-        super().__init__(*args, **kwargs)
+
+    def apply(self, request):
+        request.auth = HTTPSPNEGOAuth(creds=self._get_creds())
+        return request
 
     def _get_creds(self):
         if self.principal is None:
@@ -25,11 +29,3 @@ class GssapiHttpClient(requests_client.RequestsClient):
         if creds.lifetime <= 0:
             raise ClientError("Authentication expired", errno.EPROTO)
         return creds
-
-    def authenticated_request(self, request_params):
-        """
-        Retrieves an authentication token from kerberos
-        and adds it in the http header request.
-        """
-        request_params["auth"] = HTTPSPNEGOAuth(creds=self._get_creds())
-        return super().authenticated_request(request_params)

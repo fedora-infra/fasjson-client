@@ -3,12 +3,12 @@ from types import SimpleNamespace
 import gssapi
 import pytest
 
-from fasjson_client.gss_http import GssapiHttpClient
+from fasjson_client.gss_http import GssapiAuthenticator
 from fasjson_client.errors import ClientError
 
 
 def test_no_principal():
-    c = GssapiHttpClient()
+    c = GssapiAuthenticator("fasjson.example.com")
     assert c._get_creds() is None
 
 
@@ -23,7 +23,7 @@ def test_explicit_principal(mocker):
     gssapi_mock["Credentials"].return_value = credentials = SimpleNamespace(lifetime=10)
     gssapi_mock["NameType"].kerberos_principal = kerberos_principal = object()
 
-    c = GssapiHttpClient(principal="dummy")
+    c = GssapiAuthenticator("fasjson.example.com", principal="dummy")
     creds = c._get_creds()
 
     gssapi_mock["Name"].assert_called_once_with("dummy", kerberos_principal)
@@ -35,7 +35,7 @@ def test_auth_failed(mocker):
     gssapi_mock = mocker.patch("fasjson_client.gss_http.gssapi")
     gssapi_mock.exceptions.GSSError = gssapi.exceptions.GSSError
     gssapi_mock.Credentials.side_effect = gssapi.exceptions.GSSError(851968, 2529639053)
-    c = GssapiHttpClient(principal="dummy")
+    c = GssapiAuthenticator("fasjson.example.com", principal="dummy")
     with pytest.raises(ClientError) as e:
         c._get_creds()
     err = e.value
@@ -48,7 +48,7 @@ def test_auth_expired(mocker):
     Credentials = mocker.patch("fasjson_client.gss_http.gssapi.Credentials")
     Credentials.return_value = SimpleNamespace(lifetime=0)
 
-    c = GssapiHttpClient(principal="dummy")
+    c = GssapiAuthenticator("fasjson.example.com", principal="dummy")
     with pytest.raises(ClientError) as e:
         c._get_creds()
 
