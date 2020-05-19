@@ -4,6 +4,12 @@
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+import os
+import sys
+
+topdir = os.path.abspath("../")
+sys.path.insert(0, topdir)
+
 import fasjson_client  # NOQA
 
 
