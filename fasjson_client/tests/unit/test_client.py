@@ -1,25 +1,9 @@
-import bravado
 import pytest
 import requests
 import requests_mock
 
 from fasjson_client.client import Client
 from fasjson_client import errors
-
-
-def test_client_init(mocker):
-    bravado_client = mocker.Mock(name="mock SwaggerClient")
-    mocker.patch.object(
-        bravado.client.SwaggerClient, "from_url", return_value=bravado_client
-    )
-    c = Client("http://localhost/fasjson/")
-    bravado.client.SwaggerClient.from_url.assert_called_once()
-    call_args = bravado.client.SwaggerClient.from_url.call_args
-    assert call_args[0] == ("http://localhost/fasjson/specs/v1.json",)
-    assert call_args[1].get("config") == {}
-    assert "http_client" in call_args[1]
-    c.me.whoami()
-    bravado_client.me.whoami.assert_called_once_with()
 
 
 def test_client_normalize_url(mocker):
