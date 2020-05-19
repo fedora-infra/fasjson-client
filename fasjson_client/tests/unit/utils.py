@@ -42,4 +42,6 @@ class FasJsonMock:
         if url.startswith("/"):
             url = url[1:]
         url = f"{self.url}/v{self.api_version}/{url}"
-        self.reqs.register_uri(method, url, **kwargs)
+        headers = {"Content-Type": "application/json"}
+        headers.update(kwargs.pop("headers", {}))
+        self.reqs.register_uri(method, url, headers=headers, **kwargs)

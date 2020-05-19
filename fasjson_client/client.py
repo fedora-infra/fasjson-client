@@ -2,13 +2,14 @@ import errno
 from urllib.parse import urljoin, urlsplit
 
 from requests.exceptions import RequestException
-from bravado.client import SwaggerClient
 from bravado import requests_client
+from bravado.client import SwaggerClient, CallableOperation
 from bravado.exception import HTTPError
 from swagger_spec_validator.common import SwaggerValidationError
 
 from .gss_http import GssapiAuthenticator
 from .errors import ClientError
+from .response import ResponseWrapper
 
 
 class Client:
@@ -23,6 +24,16 @@ class Client:
         self._bravado_config = bravado_config or {}
         # self._bravado_config.setdefault("disable_fallback_results", True)
         self._api = self._make_bravado_client()
+        self._ops = self._make_ops_map()
+
+    @property
+    def operations(self):
+        """List available operations.
+
+        Returns:
+            list(str): available operation names
+        """
+        return list(self._ops)
 
     @property
     def _spec_url(self):
@@ -54,8 +65,18 @@ class Client:
             raise ClientError(
                 "remote data validation failed", errno.EPROTO, data={"exc": e}
             )
-
         return api
 
+    def _make_ops_map(self):
+        ops = {}
+        for res_name, res in self._api.swagger_spec.resources.items():
+            for op_name, op in res.operations.items():
+                ops[op_name] = ResponseWrapper(CallableOperation(op))
+        return ops
+
     def __getattr__(self, name):
-        return getattr(self._api, name)
+        try:
+            # First, try in the list of operations for direct access
+            return self._ops[name]
+        except KeyError:
+            raise AttributeError("No such operation: {!r}".format(name))
