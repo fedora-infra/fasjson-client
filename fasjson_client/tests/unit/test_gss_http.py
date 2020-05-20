@@ -7,9 +7,11 @@ from fasjson_client.gss_http import GssapiAuthenticator
 from fasjson_client.errors import ClientSetupError
 
 
-def test_no_principal():
+def test_no_principal(mocker):
+    gssapi = mocker.patch("fasjson_client.gss_http.gssapi")
     c = GssapiAuthenticator("fasjson.example.com")
-    assert c._get_creds() is None
+    c._get_creds()
+    gssapi.Credentials.assert_called_once_with(name=None, usage="initiate")
 
 
 def test_explicit_principal(mocker):
@@ -45,9 +47,15 @@ def test_auth_failed(mocker):
 
 
 def test_auth_expired(mocker):
-    Credentials = mocker.patch("fasjson_client.gss_http.gssapi.Credentials")
-    Credentials.return_value = SimpleNamespace(lifetime=0)
+    class MockCredentials(mocker.Mock):
+        @property
+        def lifetime(self):
+            return self.get_lifetime()
 
+        def get_lifetime(self):
+            raise gssapi.exceptions.ExpiredCredentialsError(851968, 2529638944)
+
+    mocker.patch("fasjson_client.gss_http.gssapi.Credentials", new=MockCredentials)
     c = GssapiAuthenticator("fasjson.example.com", principal="dummy")
     with pytest.raises(ClientSetupError) as e:
         c._get_creds()

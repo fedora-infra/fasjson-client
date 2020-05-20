@@ -20,12 +20,17 @@ class GssapiAuthenticator(requests_client.Authenticator):
 
     def _get_creds(self):
         if self.principal is None:
-            return None
-        name = gssapi.Name(self.principal, gssapi.NameType.kerberos_principal)
+            name = None
+        else:
+            name = gssapi.Name(self.principal, gssapi.NameType.kerberos_principal)
         try:
             creds = gssapi.Credentials(name=name, usage="initiate")
         except gssapi.exceptions.GSSError as e:
             raise ClientSetupError("Authentication failed", errno.EPROTO, data={"exc": e})
-        if creds.lifetime <= 0:
+        try:
+            # Accessing the lifetime property is sufficient to trigger ExpiredCredentialsError if
+            # the lifetime is <= 0
+            creds.lifetime
+        except gssapi.exceptions.ExpiredCredentialsError:
             raise ClientSetupError("Authentication expired", errno.EPROTO)
         return creds
