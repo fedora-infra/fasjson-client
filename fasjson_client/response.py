@@ -1,30 +1,46 @@
+from bravado.exception import HTTPError
+
+from .errors import APIError
+
+
 class PaginationError(Exception):
-    pass
+    """This exception is raised on pagination-related errors.
+
+    Examples: requesting a page that does not exist, requesting a page while the request is not
+    paginated, etc.
+    """
 
 
 class ResponseWrapper:
     """Wraps an operation to return our Response object.
 
-    This avoids making the user go through the .response().result hoops.
+    This avoids making the user go through the .response().result hoop.
 
-    :type operation: :class:`bravado_core.operation.Operation`
+    Args:
+        operation (bravado_core.operation.Operation): the bravado operation to wrap
     """
 
     def __init__(self, operation):
         self.operation = operation
 
     def __getattr__(self, name):
-        """Forward requests for attrs not found on this decorator to the
-        delegate.
+        """Forward requests for attrs not found on this decorator to the delegate.
         """
         return getattr(self.operation, name)
 
     def __call__(self, **kwargs):
         """Invoke the actual HTTP request and return a FASJSONResponse.
 
-        :rtype: :class:`FASJSONResponse`
+        Returns:
+            FASJSONResponse: the API call result
+
+        Raises:
+            APIError: if the API doesn't return a successful response
         """
-        call_result = self.operation(**kwargs).response().result
+        try:
+            call_result = self.operation(**kwargs).response().result
+        except HTTPError as e:
+            raise APIError.from_bravado_error(e)
         return FASJSONResponse(call_result, operation=self, operation_args=kwargs)
 
 
