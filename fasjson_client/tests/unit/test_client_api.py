@@ -1,6 +1,7 @@
 import pytest
 
 from fasjson_client.client import Client
+from fasjson_client.errors import APIError
 
 
 def test_api_success(server):
@@ -30,3 +31,32 @@ def test_api_list_operations(server):
         "list_users",
         "get_user",
     ]
+
+
+def test_api_error(server):
+    server.mock_endpoint(
+        "/me/",
+        status_code=500,
+        reason="Server Error",
+        json={"message": "Something's wrong"},
+    )
+    with pytest.raises(APIError) as e:
+        client = Client("http://example.com/fasjson")
+        client.whoami()
+    exc = e.value
+    assert exc.code == 500
+    assert exc.message == "Something's wrong"
+    assert exc.data.get("body") == {"message": "Something's wrong"}
+
+
+def test_api_error_text(server):
+    server.mock_endpoint(
+        "/me/", status_code=500, reason="Server Error", text="Internal Server Error",
+    )
+    with pytest.raises(APIError) as e:
+        client = Client("http://example.com/fasjson")
+        client.whoami()
+    exc = e.value
+    assert exc.code == 500
+    assert exc.message == "500 Server Error: Internal Server Error"
+    assert exc.data.get("body") == "Internal Server Error"

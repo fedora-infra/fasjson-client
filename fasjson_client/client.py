@@ -13,7 +13,14 @@ from .response import ResponseWrapper
 
 
 class Client:
-    """FASJSON client class that builds API methods based on openapi specs."""
+    """FASJSON client class that builds API methods based on openapi specs.
+
+    Args:
+        url (str): the URL to the FASJSON instance
+        principal (str): the Kerberos principal to use for authentication
+        api_version (int): the FASJSON API version to use
+        bravado_config (dict): additional configuration to pass down to bravado
+    """
 
     def __init__(self, url, principal=None, api_version=1, bravado_config=None):
         self._base_url = url
@@ -76,7 +83,6 @@ class Client:
 
     def __getattr__(self, name):
         try:
-            # First, try in the list of operations for direct access
             return self._ops[name]
         except KeyError:
             raise AttributeError("No such operation: {!r}".format(name))
