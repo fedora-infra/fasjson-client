@@ -10,7 +10,16 @@ import sys
 topdir = os.path.abspath("../")
 sys.path.insert(0, topdir)
 
-import fasjson_client  # NOQA
+# Set the full version, including alpha/beta/rc tags
+try:
+    import fasjson_client  # NOQA
+
+    release = fasjson_client.__version__
+except ImportError:
+    import toml
+
+    pyproject = toml.load(os.path.join(topdir, "pyproject.toml"))
+    release = pyproject["tool.poetry"]["version"]
 
 
 # -- Project information -----------------------------------------------------
@@ -20,10 +29,7 @@ copyright = "2020, Red Hat, Inc"
 author = "Fedora Infrastructure"
 
 # The short X.Y version
-version = ".".join(fasjson_client.__version__.split(".")[:2])
-
-# The full version, including alpha/beta/rc tags
-release = fasjson_client.__version__
+version = ".".join(release.split(".")[:2])
 
 
 # -- General configuration ---------------------------------------------------
