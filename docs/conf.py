@@ -19,7 +19,7 @@ except ImportError:
     import toml
 
     pyproject = toml.load(os.path.join(topdir, "pyproject.toml"))
-    release = pyproject["tool.poetry"]["version"]
+    release = pyproject["tool"]["poetry"]["version"]
 
 
 # -- Project information -----------------------------------------------------
