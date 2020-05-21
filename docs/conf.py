@@ -80,6 +80,8 @@ html_static_path = ["_static"]
 
 # -- Extension configuration -------------------------------------------------
 
+autodoc_mock_imports = ["gssapi"]
+
 # -- Options for intersphinx extension ---------------------------------------
 
 # Example configuration for intersphinx: refer to the Python standard library.
