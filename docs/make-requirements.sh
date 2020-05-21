@@ -7,7 +7,7 @@ output="${here}/requirements.txt"
 
 set -x
 
-poetry export -f requirements.txt -o "${output}"
+poetry export -f requirements.txt --without-hashes -o "${output}"
 
 # Remove the GSSAPI module because ReadTheDocs does not install C-based modules
-sed -i -e '/^gssapi==/d' "${output}"
+sed -i -e '/^gssapi==/d ; /^requests-gssapi==/d' "${output}"

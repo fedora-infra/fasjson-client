@@ -80,7 +80,7 @@ html_static_path = ["_static"]
 
 # -- Extension configuration -------------------------------------------------
 
-autodoc_mock_imports = ["gssapi"]
+autodoc_mock_imports = ["gssapi", "requests_gssapi"]
 
 # -- Options for intersphinx extension ---------------------------------------
 
