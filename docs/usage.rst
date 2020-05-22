@@ -1,5 +1,8 @@
+.. _usage-label:
+
 Usage
 -----
+
 
 Instantiate the client with the FASJSON URL you want to use::
 
@@ -75,6 +78,8 @@ For example::
 
 Your service should now be able to authenticate with Kerberos
 
+
+.. _pagination-label:
 
 Pagination
 ----------
