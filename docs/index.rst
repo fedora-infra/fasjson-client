@@ -15,6 +15,12 @@ on open-api specs (version 2.0).
 
    usage
 
+.. toctree::
+   :maxdepth: 2
+   :caption: Migration
+
+   migration
+
 
 .. Contributors
 
