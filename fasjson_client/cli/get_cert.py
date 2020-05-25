@@ -37,9 +37,12 @@ def _load_private_key(path):
         rsa.RSAPrivateKey: the private key
     """
     with open(path, "rb") as key_file:
-        private_key = serialization.load_pem_private_key(
-            key_file.read(), password=None, backend=default_backend()
-        )
+        try:
+            private_key = serialization.load_pem_private_key(
+                key_file.read(), password=None, backend=default_backend()
+            )
+        except ValueError as e:
+            raise click.ClickException("can't load the private key: {!s}".format(e))
     return private_key
 
 
@@ -60,8 +63,11 @@ def _make_private_key(path):
         format=serialization.PrivateFormat.TraditionalOpenSSL,
         encryption_algorithm=serialization.NoEncryption(),
     )
-    with open(path, "wb") as key_file:
-        key_file.write(pem)
+    try:
+        with open(path, "wb") as key_file:
+            key_file.write(pem)
+    except OSError as e:
+        raise click.ClickException("can't make a private key: {}".format(e.strerror))
     return private_key
 
 
