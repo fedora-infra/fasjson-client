@@ -26,7 +26,9 @@ class GssapiAuthenticator(requests_client.Authenticator):
         try:
             creds = gssapi.Credentials(name=name, usage="initiate")
         except gssapi.exceptions.GSSError as e:
-            raise ClientSetupError("Authentication failed", errno.EPROTO, data={"exc": e})
+            raise ClientSetupError(
+                "Authentication failed", errno.EPROTO, data={"exc": e}
+            )
         try:
             # Accessing the lifetime property is sufficient to trigger ExpiredCredentialsError if
             # the lifetime is <= 0
