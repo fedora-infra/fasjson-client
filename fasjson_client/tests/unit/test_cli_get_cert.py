@@ -1,8 +1,6 @@
 import os
 
 import pytest
-from cryptography import x509
-from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives import serialization
 from click.testing import CliRunner
 
@@ -21,15 +19,6 @@ def invoker():
         )
 
     return invoke
-
-
-@pytest.fixture
-def load_user_cert(fixture_dir):
-    def load_cert(idx):
-        with open(os.path.join(fixture_dir, "cert-{}.crt".format(idx)), "rb") as f:
-            return x509.load_pem_x509_certificate(f.read(), default_backend())
-
-    return load_cert
 
 
 @pytest.fixture
@@ -162,6 +151,19 @@ def test_sign_make_pkey(invoker, server, tmp_path, get_cert_b64, fixture_dir):
     assert result_cert == expected_cert
 
 
+def test_sign_make_pkey_failure(invoker, server, tmp_path, get_cert_b64, fixture_dir):
+    dest_cert = os.path.join(tmp_path, "dummy.crt")
+    dest_key = os.path.join(tmp_path, "sub-directory", "dummy.key")
+    user_response = {"result": {"certificate": get_cert_b64(1)}}
+    server.mock_endpoint("/certs/", method="POST", json=user_response)
+
+    result = invoker("-u", "dummy", "--save-to", dest_cert, "--private-key", dest_key)
+    assert result.exit_code == 1
+    assert (
+        result.output == "Error: can't make a private key: No such file or directory\n"
+    )
+
+
 def test_sign_error(invoker, server, tmp_path, get_cert_b64, fixture_dir):
     dest_cert = os.path.join(tmp_path, "dummy.crt")
     dest_key = os.path.join(tmp_path, "dummy.key")
@@ -207,7 +209,7 @@ def test_sign_use_existing_pkey(invoker, tmp_path, mocker, fixture_dir):
         "dummy",
     )
     assert result.exit_code == 0
-    make_csr.assrt_called_once()
+    make_csr.assert_called_once()
     call_args = make_csr.call_args[0]
     assert call_args[0] == "dummy"
 
@@ -221,3 +223,29 @@ def test_sign_use_existing_pkey(invoker, tmp_path, mocker, fixture_dir):
     with open(privkey_path, "rb") as f:
         expected_key = f.read()
     assert key_pem == expected_key
+
+
+def test_sign_bad_pkey(invoker, tmp_path, mocker, fixture_dir):
+    dest_cert = os.path.join(tmp_path, "dummy.crt")
+    privkey_path = os.path.join(tmp_path, "private.key")
+    # Create the private key as an empty file
+    open(privkey_path, "w").close()
+
+    make_csr = mocker.patch("fasjson_client.cli.get_cert._make_csr")
+
+    result = invoker(
+        "-u",
+        "dummy",
+        "--save-to",
+        dest_cert,
+        "--private-key",
+        privkey_path,
+        "-u",
+        "dummy",
+    )
+    assert result.exit_code == 1
+    expected_msg = (
+        "Error: can't load the private key: Could not deserialize key data.\n"
+    )
+    assert result.output == expected_msg
+    make_csr.assert_not_called()
