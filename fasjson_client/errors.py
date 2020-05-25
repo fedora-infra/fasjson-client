@@ -1,7 +1,7 @@
 from bravado.exception import HTTPError
 
 
-class BaseError(Exception):
+class ClientError(Exception):
     """
     Base exception class that is in inherited from all other exceptions.
     """
@@ -29,13 +29,13 @@ class BaseError(Exception):
         return self.message
 
 
-class ClientError(BaseError):
+class ClientSetupError(ClientError):
     """
     Client exception whcih is raised in case of openapi spec and client setup issues.
     """
 
 
-class APIError(BaseError):
+class APIError(ClientError):
     """
     Error returned by the API
     """

@@ -1,12 +1,12 @@
 import pytest
 
-from fasjson_client.errors import ClientError, APIError
+from fasjson_client.errors import ClientSetupError, APIError
 
 
 def test_client_error():
-    e = ClientError("message", 42, {"foo": "bar"})
+    e = ClientSetupError("message", 42, {"foo": "bar"})
     assert str(e) == "message"
-    assert repr(e) == "<ClientError code=42 message=message data={'foo': 'bar'}>"
+    assert repr(e) == "<ClientSetupError code=42 message=message data={'foo': 'bar'}>"
 
 
 def test_api_error_bad_source():

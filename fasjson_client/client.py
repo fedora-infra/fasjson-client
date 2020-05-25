@@ -8,7 +8,7 @@ from bravado.exception import HTTPError
 from swagger_spec_validator.common import SwaggerValidationError
 
 from .gss_http import GssapiAuthenticator
-from .errors import ClientError
+from .errors import ClientSetupError
 from .response import ResponseWrapper
 
 
@@ -63,13 +63,15 @@ class Client:
             }
             if getattr(e, "status_code", None):
                 data["status_code"] = e.status_code
-            raise ClientError(
+            raise ClientSetupError(
                 "error loading remote spec", errno.ECONNABORTED, data=data
             )
         except SwaggerValidationError as e:
-            raise ClientError("schema validation failed", errno.EPROTO, data={"exc": e})
+            raise ClientSetupError(
+                "schema validation failed", errno.EPROTO, data={"exc": e}
+            )
         except ValueError as e:
-            raise ClientError(
+            raise ClientSetupError(
                 "remote data validation failed", errno.EPROTO, data={"exc": e}
             )
         return api

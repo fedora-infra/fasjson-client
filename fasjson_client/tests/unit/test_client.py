@@ -13,7 +13,7 @@ def test_client_normalize_url(mocker):
 
 
 def test_client_wrong_url():
-    with requests_mock.mock() as m, pytest.raises(errors.ClientError) as e:
+    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", status_code=404, reason="Not Found")
         Client("http://example.com/")
     err = e.value
@@ -22,7 +22,7 @@ def test_client_wrong_url():
 
 
 def test_client_spec_parse_error():
-    with requests_mock.mock() as m, pytest.raises(errors.ClientError) as e:
+    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", text="{somethin: {wrong:")
         Client("http://example.com")
     err = e.value
@@ -32,7 +32,7 @@ def test_client_spec_parse_error():
 
 
 def test_client_spec_invalid():
-    with requests_mock.mock() as m, pytest.raises(errors.ClientError) as e:
+    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", text='{"foo": "bar"}')
         Client("http://example.com")
     err = e.value
@@ -42,7 +42,7 @@ def test_client_spec_invalid():
 
 
 def test_client_conn_error():
-    with requests_mock.mock() as m, pytest.raises(errors.ClientError) as e:
+    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get(
             "http://example.com/specs/v1.json",
             exc=requests.exceptions.ConnectTimeout("A timeout occurred"),
@@ -54,7 +54,7 @@ def test_client_conn_error():
 
 
 def test_client_response_error():
-    with requests_mock.mock() as m, pytest.raises(errors.ClientError) as e:
+    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", reason="Forbidden", status_code=403)
         Client("http://example.com")
     err = e.value

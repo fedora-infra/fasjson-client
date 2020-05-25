@@ -4,7 +4,7 @@ import gssapi
 import pytest
 
 from fasjson_client.gss_http import GssapiAuthenticator
-from fasjson_client.errors import ClientError
+from fasjson_client.errors import ClientSetupError
 
 
 def test_no_principal():
@@ -36,7 +36,7 @@ def test_auth_failed(mocker):
     gssapi_mock.exceptions.GSSError = gssapi.exceptions.GSSError
     gssapi_mock.Credentials.side_effect = gssapi.exceptions.GSSError(851968, 2529639053)
     c = GssapiAuthenticator("fasjson.example.com", principal="dummy")
-    with pytest.raises(ClientError) as e:
+    with pytest.raises(ClientSetupError) as e:
         c._get_creds()
     err = e.value
     assert "Authentication failed" == str(err)
@@ -49,7 +49,7 @@ def test_auth_expired(mocker):
     Credentials.return_value = SimpleNamespace(lifetime=0)
 
     c = GssapiAuthenticator("fasjson.example.com", principal="dummy")
-    with pytest.raises(ClientError) as e:
+    with pytest.raises(ClientSetupError) as e:
         c._get_creds()
 
     err = e.value

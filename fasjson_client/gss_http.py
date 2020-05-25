@@ -4,7 +4,7 @@ import gssapi
 from requests_gssapi import HTTPSPNEGOAuth
 from bravado import requests_client
 
-from .errors import ClientError
+from .errors import ClientSetupError
 
 
 class GssapiAuthenticator(requests_client.Authenticator):
@@ -25,7 +25,7 @@ class GssapiAuthenticator(requests_client.Authenticator):
         try:
             creds = gssapi.Credentials(name=name, usage="initiate")
         except gssapi.exceptions.GSSError as e:
-            raise ClientError("Authentication failed", errno.EPROTO, data={"exc": e})
+            raise ClientSetupError("Authentication failed", errno.EPROTO, data={"exc": e})
         if creds.lifetime <= 0:
-            raise ClientError("Authentication expired", errno.EPROTO)
+            raise ClientSetupError("Authentication expired", errno.EPROTO)
         return creds
