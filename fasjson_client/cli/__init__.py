@@ -4,8 +4,8 @@ from importlib import import_module
 
 import click
 
+from fasjson_client.defaults import FASJSON_URL
 
-DEFAULT_FASJSON_URL = "https://fasjson.os.fedoraproject.org"
 
 log = logging.getLogger(__name__)
 
@@ -45,7 +45,7 @@ def _register_subcommand(group, module_name, command_name=None):
 
 @click.group()
 @click.option(
-    "--url", default=DEFAULT_FASJSON_URL, help="URL to the FASJSON instance",
+    "--url", default=FASJSON_URL, help="URL to the FASJSON instance",
 )
 @click.option("--verbose", is_flag=True, default=False, help="Print more information")
 @click.option("--quiet", is_flag=True, default=False, help="Print less information")
