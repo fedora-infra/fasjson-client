@@ -30,6 +30,16 @@ def get_cert_b64(fixture_dir):
     return _get_cert
 
 
+def test_no_save_to(invoker, mocker):
+    result = invoker()
+    assert result.exit_code == 2
+    expected_msg = (
+        "Error: Invalid value for save_to: the destination file must be specified "
+        "on the command line or in the configuration file."
+    )
+    assert expected_msg in result.output
+
+
 def test_no_private_key(invoker):
     result = invoker("-u", "dummy", "--save-to", "dummy")
     assert result.exit_code == 2

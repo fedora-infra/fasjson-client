@@ -63,3 +63,19 @@ class APIError(ClientError):
                 "swagger_result": error.swagger_result,
             },
         )
+
+
+class ConfigurationException(ClientSetupError):
+    """
+    Raised when there's an invalid configuration setting
+
+    Args:
+        message (str): A detailed description of the configuration problem
+                       which is presented to the user.
+    """
+
+    def __init__(self, message):
+        super().__init__(message=message, code=None)
+
+    def __str__(self):
+        return "Configuration error: {}".format(self.message)
