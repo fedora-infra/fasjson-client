@@ -4,7 +4,7 @@ from importlib import import_module
 
 import click
 
-from fasjson_client.defaults import FASJSON_URL
+from fasjson_client.config import conf
 
 
 log = logging.getLogger(__name__)
@@ -45,15 +45,23 @@ def _register_subcommand(group, module_name, command_name=None):
 
 @click.group()
 @click.option(
-    "--url", default=FASJSON_URL, help="URL to the FASJSON instance",
+    "-c", "--config", "config_path", help="Path to the configuration file",
+)
+@click.option(
+    "--url", help="URL to the FASJSON instance",
 )
 @click.option("--verbose", is_flag=True, default=False, help="Print more information")
 @click.option("--quiet", is_flag=True, default=False, help="Print less information")
 @click.pass_context
-def cli(ctx, url, verbose, quiet):
+def cli(ctx, config_path, url, verbose, quiet):
     """Make API calls to FASJSON from the command line."""
+
+    conf.load_config(config_path)
+
     ctx.ensure_object(dict)
-    ctx.obj["url"] = url
+    ctx.obj["url"] = url or conf["url"]
+    verbose = verbose or conf["verbose"]
+    quiet = quiet or conf["quiet"]
 
     if verbose and quiet:
         raise click.UsageError("You can't have --verbose and --quiet at the same time.")
