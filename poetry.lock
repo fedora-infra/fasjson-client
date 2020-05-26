@@ -89,7 +89,7 @@ description = "Library for accessing Swagger-enabled API's"
 name = "bravado"
 optional = false
 python-versions = "!=3.0,!=3.1,!=3.2,!=3.3,!=3.4,!=3.5.0"
-version = "10.6.0"
+version = "10.6.2"
 
 [package.dependencies]
 bravado-core = ">=5.16.1"
@@ -988,8 +988,8 @@ black = [
     {file = "black-19.10b0.tar.gz", hash = "sha256:c2edb73a08e9e0e6f65a0e6af18b059b8b1cdd5bef997d7a0b181df93dc81539"},
 ]
 bravado = [
-    {file = "bravado-10.6.0-py2.py3-none-any.whl", hash = "sha256:bc4c5efed34acd903ea65901b3acda06f3490484447d26d2a9146b2c9cd589aa"},
-    {file = "bravado-10.6.0.tar.gz", hash = "sha256:f1e81041f1e48478cce4e6805d57572b29ad2cf3187aae393c4eb3a2b8a053c2"},
+    {file = "bravado-10.6.2-py2.py3-none-any.whl", hash = "sha256:e3623a6cd551c650bcb1f7881f08c4f767bc2e8cbac0c0f63ffbbb9835855d46"},
+    {file = "bravado-10.6.2.tar.gz", hash = "sha256:b2b0ae6d190ab699646261eb569a24902683a25d3834473d1f88c78ab88ca854"},
 ]
 bravado-core = [
     {file = "bravado-core-5.17.0.tar.gz", hash = "sha256:b3b06ae86d3c80de5694340e55df7c9097857ff965b76642979e2a961f332abf"},
