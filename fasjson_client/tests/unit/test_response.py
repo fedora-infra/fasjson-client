@@ -24,7 +24,7 @@ def test_response_paged(server):
     with pytest.raises(PaginationError):
         response.prev_page()
     response.next_page()
-    assert server.reqs.last_request.qs == {"page_size": ["2"], "page": ["2"]}
+    assert server.reqs.last_request.qs == {"page_size": ["2"], "page_number": ["2"]}
 
 
 def test_response_single_page(server):
