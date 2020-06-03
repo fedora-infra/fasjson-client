@@ -14,6 +14,11 @@ readme = 'README.md'  # Markdown files are supported
 repository = "https://github.com/fedora-infra/fasjson-client"
 homepage = "https://github.com/fedora-infra/fasjson-client"
 
+include = [
+  "tox.ini",
+  "config.toml.example",
+]
+
 keywords = ['security']
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",

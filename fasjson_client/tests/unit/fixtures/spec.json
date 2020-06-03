@@ -73,7 +73,7 @@
         },
         "Group": {
             "properties": {
-                "name": {
+                "groupname": {
                     "type": "string"
                 },
                 "uri": {
@@ -213,6 +213,9 @@
                             }
                         }
                     },
+                    "400": {
+                        "description": "The CSR could not be signed"
+                    },
                     "401": {
                         "description": "Unauthorized. You need to be logged in."
                     }
@@ -283,7 +286,7 @@
                         "default": 1,
                         "description": "Page number.",
                         "in": "query",
-                        "name": "page",
+                        "name": "page_number",
                         "type": "integer"
                     },
                     {
@@ -318,7 +321,7 @@
                 ]
             }
         },
-        "/groups/{name}/": {
+        "/groups/{groupname}/": {
             "get": {
                 "operationId": "get_group",
                 "parameters": [
@@ -357,13 +360,13 @@
                 {
                     "description": "The group name",
                     "in": "path",
-                    "name": "name",
+                    "name": "groupname",
                     "required": true,
                     "type": "string"
                 }
             ]
         },
-        "/groups/{name}/members/": {
+        "/groups/{groupname}/members/": {
             "get": {
                 "operationId": "get_group_members",
                 "parameters": [
@@ -377,7 +380,7 @@
                         "default": 1,
                         "description": "Page number.",
                         "in": "query",
-                        "name": "page",
+                        "name": "page_number",
                         "type": "integer"
                     },
                     {
@@ -418,7 +421,7 @@
                 {
                     "description": "The group name",
                     "in": "path",
-                    "name": "name",
+                    "name": "groupname",
                     "required": true,
                     "type": "string"
                 }
@@ -471,7 +474,7 @@
                         "default": 1,
                         "description": "Page number.",
                         "in": "query",
-                        "name": "page",
+                        "name": "page_number",
                         "type": "integer"
                     },
                     {

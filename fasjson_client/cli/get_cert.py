@@ -19,6 +19,7 @@ from cryptography.hazmat.primitives.asymmetric import rsa
 from cryptography.x509.oid import NameOID
 
 from fasjson_client import Client
+from fasjson_client.config import conf
 from fasjson_client.errors import ClientError, APIError
 
 
@@ -187,11 +188,13 @@ def _write_certificate(cert, path):
     help="The path to the private key. If it does not exist, it will be generated.",
 )
 @click.option(
-    "-s",
-    "--save-to",
-    required=True,
-    type=click.Path(),
-    help="The path to save your certificate to.",
+    "-s", "--save-to", type=click.Path(), help="The path to save your certificate to.",
+)
+@click.option(
+    "--overwrite",
+    is_flag=True,
+    default=False,
+    help="Overwrite the destination file if it exists.",
 )
 @click.option(
     "--existing",
@@ -200,13 +203,29 @@ def _write_certificate(cert, path):
     help="Retrieve an existing certificate instead of generating a new one.",
 )
 @click.pass_context
-def get_cert(ctx, username, private_key, save_to, existing):
+def get_cert(ctx, username, private_key, save_to, overwrite, existing):
     """Get a certificate for the provided username.
 
     The certificate can be an existing one or a new one. In this case a private key is either
     required or generated.
     """
-    if os.path.exists(save_to):
+
+    # Fallback to config file values
+    username = username or conf["get-cert"]["username"]
+    private_key = private_key or conf["get-cert"]["private_key"]
+    save_to = save_to or conf["get-cert"]["save_to"]
+    overwrite = overwrite or conf["get-cert"]["overwrite"]
+    existing = existing or conf["get-cert"]["existing"]
+
+    # Validate options
+    if save_to is None:
+        raise click.BadParameter(
+            "the destination file must be specified on the command line or in the "
+            "configuration file. Aborting.",
+            param_hint="save_to",
+        )
+    save_to = os.path.expanduser(save_to)
+    if os.path.exists(save_to) and not overwrite:
         raise click.BadParameter(
             "the destination file {} already exists. Aborting.".format(save_to),
             param_hint="save_to",
@@ -238,6 +257,7 @@ def get_cert(ctx, username, private_key, save_to, existing):
             "to be loaded from or saved to."
         )
 
+    private_key = os.path.expanduser(private_key)
     if os.path.exists(private_key):
         private_key = _load_private_key(private_key)
     else:

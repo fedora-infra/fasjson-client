@@ -1,0 +1,9 @@
+# A sample configuration for fasjson-client. This file is in the TOML format.
+
+url = "https://fasjson.example.com/"
+
+[get-cert]
+username = "arthur"
+private_key = "~/.fedora/privatekey.pem"
+save_to = "~/.fedora/cert.pem"
+overwrite = true

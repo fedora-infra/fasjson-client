@@ -85,7 +85,7 @@ class FASJSONResponse:
             raise PaginationError("There is no page {}".format(page_to_get))
         args = self._operation_args.copy()
         args.update(
-            {"page_size": self.page["page_size"], "page": page_number + shift_by}
+            {"page_size": self.page["page_size"], "page_number": page_number + shift_by}
         )
         return self._operation(**args)
 
