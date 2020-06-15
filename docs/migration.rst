@@ -22,7 +22,7 @@ Groups
 group_by_id
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-You must now use the ``groupname`` instead of ``id``. 
+You must now use the ``groupname`` instead of ``id``.
 
     >>> client.get_group(groupname="testGroup").result
     {'groupname': 'testGroup', 'uri': 'http://fasjson.example.test/fasjson/v1/groups/testGroup/'}
@@ -70,3 +70,19 @@ people_by_groupname
 
     >>> client.get_group_members(groupname="testGroup", page_size=5).result
     [{'username': 'user1', [...]}, {'username': 'user2', [...]}]
+
+
+Getting all items at once
+*************************
+
+The ``list_all_entities`` method is an iterator over all records of an entity in FASJSON, for
+example ``users`` or ``groups``. They will be retrieved in multiple server calls (using pagination).
+You can specify the number of users that should be returned in each server call in the ``page_size``
+argument if you have performance issues, but the default should be fine. An example with users::
+
+    >>> for user in client.list_all_entities("users", page_size=1000):
+    ...     print(user)
+    {'username': 'user1', [...]}
+    {'username': 'user2', [...]}
+    {'username': 'user3', [...]}
+    [...]
