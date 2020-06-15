@@ -36,12 +36,24 @@ class FasJsonMock:
         self.stop()
         return False
 
-    def mock_endpoint(self, url, method="GET", **kwargs):
+    def mock_endpoint(self, url, responses=None, **kwargs):
         if self.reqs is None:
             return RuntimeError("You must enter FasJsonMock's context manager first")
         if url.startswith("/"):
             url = url[1:]
         url = f"{self.url}/v{self.api_version}/{url}"
-        headers = {"Content-Type": "application/json"}
-        headers.update(kwargs.pop("headers", {}))
-        self.reqs.register_uri(method, url, headers=headers, **kwargs)
+        method = kwargs.pop("method", "GET")
+        default_headers = {"Content-Type": "application/json"}
+
+        def _set_default_in_params(params):
+            headers = default_headers.copy()
+            headers.update(params.get("headers", {}))
+            params["headers"] = headers
+
+        if responses:
+            for response in responses:
+                _set_default_in_params(response)
+            self.reqs.register_uri(method, url, responses)
+        else:
+            _set_default_in_params(kwargs)
+            self.reqs.register_uri(method, url, **kwargs)

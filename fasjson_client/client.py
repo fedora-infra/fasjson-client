@@ -90,3 +90,18 @@ class Client:
             return self._ops[name]
         except KeyError:
             raise AttributeError("No such operation: {!r}".format(name))
+
+    def list_all_entities(self, entity_name, page_size=1000):
+        try:
+            operation = self._ops["list_{}".format(entity_name)]
+        except KeyError:
+            raise ValueError(
+                "No such entity: {}. Is it plural? It should be.".format(entity_name)
+            )
+        page_number = 0
+        next_page_exists = True
+        while next_page_exists:
+            page_number += 1
+            response = operation(page_size=page_size, page_number=page_number)
+            yield from response.result
+            next_page_exists = page_number < response.page["total_pages"]
