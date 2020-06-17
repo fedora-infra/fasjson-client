@@ -38,6 +38,7 @@ requests = "^2.23.0"
 requests-gssapi = "^1.2.1"
 cryptography = {version = "^2.9.2", optional = true}
 click = {version = "^7.1.2", optional = true}
+toml = "^0.10.1"
 
 [tool.poetry.dev-dependencies]
 coverage = "^5.1"

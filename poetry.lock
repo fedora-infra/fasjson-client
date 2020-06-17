@@ -166,7 +166,7 @@ version = "7.1.2"
 [[package]]
 category = "dev"
 description = "Cross-platform colored terminal text."
-marker = "platform_system == \"Windows\" or sys_platform == \"win32\""
+marker = "sys_platform == \"win32\" or platform_system == \"Windows\""
 name = "colorama"
 optional = false
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
@@ -886,7 +886,7 @@ pyyaml = "*"
 six = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python Library for Tom's Obvious, Minimal Language"
 name = "toml"
 optional = false
@@ -955,7 +955,7 @@ testing = ["jaraco.itertools", "func-timeout"]
 cli = ["click", "cryptography"]
 
 [metadata]
-content-hash = "c2321c4033e3a4a24dcf0531be9ad7c458351714adb7e10827856af90e1cc3d0"
+content-hash = "aa15f8ff98943de5c63feddf8208785c6ad62233c056427b75ea8782d5081fcc"
 python-versions = "^3.6"
 
 [metadata.files]
