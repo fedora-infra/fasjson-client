@@ -625,7 +625,7 @@ socks = ["PySocks (>=1.5.6,!=1.5.7)", "win-inet-pton"]
 
 [[package]]
 name = "requests-gssapi"
-version = "1.2.1"
+version = "1.2.2"
 description = "A GSSAPI authentication handler for python-requests"
 category = "main"
 optional = false
@@ -1297,7 +1297,7 @@ requests = [
     {file = "requests-2.25.0.tar.gz", hash = "sha256:7f1a0b932f4a60a1a65caa4263921bb7d9ee911957e0ae4a23a6dd08185ad5f8"},
 ]
 requests-gssapi = [
-    {file = "requests-gssapi-1.2.1.tar.gz", hash = "sha256:d28d9035a467fbfc8747725f1ea97fb070be617e0c3b49151ec4b00b164c276b"},
+    {file = "requests-gssapi-1.2.2.tar.gz", hash = "sha256:bbc6abbde8744c154a508638e5c7e226611acdbbdce454463af27bd7d0d0bee9"},
 ]
 requests-mock = [
     {file = "requests-mock-1.8.0.tar.gz", hash = "sha256:e68f46844e4cee9d447150343c9ae875f99fa8037c6dcf5f15bf1fe9ab43d226"},
