@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fasjson-client"
-version = "0.0.4"
+version = "0.1.0"
 description = "An OpenAPI client for FASJSON"
 
 license = "LGPL-3.0-or-later"
@@ -21,7 +21,7 @@ include = [
 
 keywords = ['security']
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
+    "Development Status :: 4 - Beta",
     "Programming Language :: Python :: 3.6",
     "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
