@@ -10,7 +10,9 @@ from fasjson_client.errors import ConfigurationException
 
 @pytest.fixture
 def conf():
-    return LazyConfig("dummy-app", DEFAULTS, VALIDATORS)
+    conf = LazyConfig("dummy-app", DEFAULTS, VALIDATORS)
+    conf._load_paths = []
+    return conf
 
 
 @pytest.fixture
