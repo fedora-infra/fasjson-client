@@ -35,6 +35,19 @@ def test_config_dict_behavior(mocker, conf):
     assert conf["foo"] == "bar"
 
 
+def test_config_iter_behavior(mocker, conf):
+    load_config = mocker.spy(conf, "load_config")
+
+    iterator = iter(conf)
+    assert "url" in iterator
+    assert load_config.call_count == 1
+
+    # Verify that the configuration is cached
+    iterator = iter(conf)
+    assert "verbose" in iterator
+    assert load_config.call_count == 1
+
+
 def test_config_lazy_load(mocker, conf):
     load_config = mocker.spy(conf, "load_config")
     key = list(DEFAULTS)[0]
