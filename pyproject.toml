@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fasjson-client"
-version = "0.1.0"
+version = "0.1.1"
 description = "An OpenAPI client for FASJSON"
 
 license = "LGPL-3.0-or-later"
