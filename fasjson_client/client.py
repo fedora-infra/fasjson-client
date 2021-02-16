@@ -20,15 +20,17 @@ class Client:
         principal (str): the Kerberos principal to use for authentication
         api_version (int): the FASJSON API version to use
         bravado_config (dict): additional configuration to pass down to bravado
+        auth (bool): whether or not the client should use auth. only for testing.
     """
 
-    def __init__(self, url, principal=None, api_version=1, bravado_config=None):
+    def __init__(self, url, principal=None, api_version=1, bravado_config=None, auth=True):
         self._base_url = url
         if not self._base_url.endswith("/"):
             self._base_url += "/"
         self._principal = principal
         self._api_version = api_version
         self._bravado_config = bravado_config or {}
+        self._auth = auth
         # self._bravado_config.setdefault("disable_fallback_results", True)
         self._api = self._make_bravado_client()
         self._ops = self._make_ops_map()
@@ -49,9 +51,10 @@ class Client:
     def _make_bravado_client(self):
         http_client = requests_client.RequestsClient()
         server_hostname = urlsplit(self._base_url).netloc
-        http_client.authenticator = GssapiAuthenticator(
-            server_hostname, principal=self._principal
-        )
+        if self._auth:
+            http_client.authenticator = GssapiAuthenticator(
+                server_hostname, principal=self._principal
+            )
         try:
             api = SwaggerClient.from_url(
                 self._spec_url, http_client=http_client, config=self._bravado_config,
