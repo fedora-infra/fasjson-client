@@ -25,6 +25,26 @@ def test_client_wrong_url(mocker):
     assert err.data["message"] == "404 Not Found"
 
 
+def test_client_no_auth(mocker):
+    gss = mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
+    mocker.patch("fasjson_client.client.SwaggerClient.from_url", return_value=None)
+    mocker.patch.object(Client, "_make_ops_map")
+    c = Client(url="http://localhost/fasjson", auth=False)
+
+    assert c._auth is False
+    gss.assert_not_called()
+
+
+def test_client_auth(mocker):
+    gss = mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
+    mocker.patch("fasjson_client.client.SwaggerClient.from_url", return_value=None)
+    mocker.patch.object(Client, "_make_ops_map")
+    c = Client(url="http://localhost/fasjson", auth=True)
+
+    assert c._auth is True
+    gss.assert_called()
+
+
 def test_client_spec_parse_error(mocker):
     mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
     with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
