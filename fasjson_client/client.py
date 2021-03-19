@@ -23,7 +23,9 @@ class Client:
         auth (bool): whether or not the client should use auth. only for testing.
     """
 
-    def __init__(self, url, principal=None, api_version=1, bravado_config=None, auth=True):
+    def __init__(
+        self, url, principal=None, api_version=1, bravado_config=None, auth=True
+    ):
         self._base_url = url
         if not self._base_url.endswith("/"):
             self._base_url += "/"
