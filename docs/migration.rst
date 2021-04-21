@@ -36,7 +36,7 @@ group_by_name
 group_members
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    >>> client.get_group_members(groupname="testGroup", page_size=5).result
+    >>> client.list_group_members(groupname="testGroup", page_size=5).result
     [{'username': 'user1', [...]}, {'username': 'user2', [...]}]
 
 People
@@ -68,7 +68,7 @@ user_data
 people_by_groupname
 ~~~~~~~~~~~~~~~~~~~
 
-    >>> client.get_group_members(groupname="testGroup", page_size=5).result
+    >>> client.list_group_members(groupname="testGroup", page_size=5).result
     [{'username': 'user1', [...]}, {'username': 'user2', [...]}]
 
 
