@@ -625,7 +625,7 @@ requests = ">=1.1.0"
 
 [[package]]
 name = "requests-mock"
-version = "1.9.0"
+version = "1.9.1"
 description = "Mock out responses from the requests package"
 category = "dev"
 optional = false
@@ -1361,8 +1361,8 @@ requests-gssapi = [
     {file = "requests-gssapi-1.2.3.tar.gz", hash = "sha256:20784508981401f7153c933eed095338933a40818da65a259dbf2d80dccb150e"},
 ]
 requests-mock = [
-    {file = "requests-mock-1.9.0.tar.gz", hash = "sha256:fc9b992daa522031deb3d72ed10e39e8dc0ffd7131cc278d39517273c088a745"},
-    {file = "requests_mock-1.9.0-py2.py3-none-any.whl", hash = "sha256:87607be91d6b4c8c9ec86e0bac6d29fd027dfbf99e710e00b406da60c98aa0d4"},
+    {file = "requests-mock-1.9.1.tar.gz", hash = "sha256:154903e7646b8215fbdccc6898c32a77b87d2fbafad2f43e99d6d7987dc86953"},
+    {file = "requests_mock-1.9.1-py2.py3-none-any.whl", hash = "sha256:705c03efff5c4e38a00eb203e71e9b4381fbce9679870bda3ac533b61a0b8b9d"},
 ]
 rfc3987 = [
     {file = "rfc3987-1.3.8-py2.py3-none-any.whl", hash = "sha256:10702b1e51e5658843460b189b185c0366d2cf4cff716f13111b0ea9fd2dce53"},
