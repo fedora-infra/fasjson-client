@@ -26,7 +26,7 @@ def test_api_list_operations(server):
         "get_cert",
         "list_groups",
         "get_group",
-        "get_group_members",
+        "list_group_members",
         "whoami",
         "list_users",
         "get_user",

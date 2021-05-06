@@ -368,7 +368,7 @@
         },
         "/groups/{groupname}/members/": {
             "get": {
-                "operationId": "get_group_members",
+                "operationId": "list_group_members",
                 "parameters": [
                     {
                         "description": "Page size.",
