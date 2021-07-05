@@ -888,7 +888,7 @@ python-versions = ">=3.5,"
 
 [[package]]
 name = "zipp"
-version = "3.4.2"
+version = "3.5.0"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 category = "main"
 optional = false
@@ -1547,6 +1547,6 @@ webcolors = [
     {file = "webcolors-1.11.1.tar.gz", hash = "sha256:76f360636957d1c976db7466bc71dcb713bb95ac8911944dffc55c01cb516de6"},
 ]
 zipp = [
-    {file = "zipp-3.4.2-py3-none-any.whl", hash = "sha256:a5303f8ad20aff64720bf548256646f74fc8c167065c0d177a98a7cadceed85a"},
-    {file = "zipp-3.4.2.tar.gz", hash = "sha256:ce85de43ee0ead77dd0fbee3902bec1501aef59b92a2e18265396b22a1d756ab"},
+    {file = "zipp-3.5.0-py3-none-any.whl", hash = "sha256:957cfda87797e389580cb8b9e3870841ca991e2125350677b2ca83a0e99390a3"},
+    {file = "zipp-3.5.0.tar.gz", hash = "sha256:f5812b1e007e48cff63449a5e9f4e7ebea716b4111f9c4f9a645f91d579bf0c4"},
 ]
