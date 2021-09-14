@@ -271,7 +271,7 @@ typing-extensions = {version = ">=3.7.4.0", markers = "python_version < \"3.8\""
 
 [[package]]
 name = "gssapi"
-version = "1.6.14"
+version = "1.7.0"
 description = "Python GSSAPI Wrapper"
 category = "main"
 optional = false
@@ -1107,15 +1107,15 @@ gitpython = [
     {file = "GitPython-3.1.18.tar.gz", hash = "sha256:b838a895977b45ab6f0cc926a9045c8d1c44e2b653c1fcc39fe91f42c6e8f05b"},
 ]
 gssapi = [
-    {file = "gssapi-1.6.14-cp36-cp36m-win32.whl", hash = "sha256:12bfda5634fb542e649c5d13afea683a1256d54296fecea940e3275b79242a02"},
-    {file = "gssapi-1.6.14-cp36-cp36m-win_amd64.whl", hash = "sha256:20cc2873798d123ca6726365c706854cb589297ceabfabf30589b2c298bca8aa"},
-    {file = "gssapi-1.6.14-cp37-cp37m-win32.whl", hash = "sha256:c0d339e593494a3c0cb347711ea50ff806529da30fb2fdb9165c8127c91d4f8e"},
-    {file = "gssapi-1.6.14-cp37-cp37m-win_amd64.whl", hash = "sha256:7b4ee387d6d61291be699c56e77504facd4dca9804d12a1359ef8a1635d6d782"},
-    {file = "gssapi-1.6.14-cp38-cp38-win32.whl", hash = "sha256:d7ddd253c49b27753809401e4136dabff75389d326707899ae616da4abcd3ca6"},
-    {file = "gssapi-1.6.14-cp38-cp38-win_amd64.whl", hash = "sha256:dac4dae90416f89a3c4924ce365f0fdb7adfeaf68a997341d9c74a779837ab39"},
-    {file = "gssapi-1.6.14-cp39-cp39-win32.whl", hash = "sha256:68f772f4ef757ae9a7a7126cba118bf995159a2d5f66846bd351cf4690ec8279"},
-    {file = "gssapi-1.6.14-cp39-cp39-win_amd64.whl", hash = "sha256:a2d2883cdf04d16070c7bca209f7366ac07e382d025bc9f164fb3e99ab3306b3"},
-    {file = "gssapi-1.6.14.tar.gz", hash = "sha256:1bb0a41c9985ad78b973aa3c9f1fa200b543013e3a1b2a24463c2e5d8d1afaf1"},
+    {file = "gssapi-1.7.0-cp36-cp36m-win32.whl", hash = "sha256:3f8dd4352db5f08f0dea5c2382be70840ebc0f391e3de0d932a158b764be2f4f"},
+    {file = "gssapi-1.7.0-cp36-cp36m-win_amd64.whl", hash = "sha256:1e9bba512b7e731a0f90474866119445ffb2ffba9b8a4f2c54ef71263deab849"},
+    {file = "gssapi-1.7.0-cp37-cp37m-win32.whl", hash = "sha256:de7543e7572ffba32ebaf14606eb27358e243699ab71db15d67dce662f284c33"},
+    {file = "gssapi-1.7.0-cp37-cp37m-win_amd64.whl", hash = "sha256:ea5f1ea7d1caf27184acaa8b284534db9e19633d6be44143f7c6d34e85189ffb"},
+    {file = "gssapi-1.7.0-cp38-cp38-win32.whl", hash = "sha256:98c94f5d4019c35d2c4eda4cd2d9e0eae89b7c25c15cdddff1e8ff75a11eb9aa"},
+    {file = "gssapi-1.7.0-cp38-cp38-win_amd64.whl", hash = "sha256:1ae9a7ad4a2423c5560be849ebcb2d9e61d704d6ee38075c574bdeefb6b29499"},
+    {file = "gssapi-1.7.0-cp39-cp39-win32.whl", hash = "sha256:87bb5714aea7c15fefa40ab4742af8babd5f68cdf14da0a637e1df1c72ebaccd"},
+    {file = "gssapi-1.7.0-cp39-cp39-win_amd64.whl", hash = "sha256:97c1e4119ff1ff90480cec2f229dfef0d08edff83cd734c783b486b4e19a98a8"},
+    {file = "gssapi-1.7.0.tar.gz", hash = "sha256:e7b8ae92033f9b487762f7dc7dbf55616b27cf767c1fc0126cdc88414df4111c"},
 ]
 idna = [
     {file = "idna-3.2-py3-none-any.whl", hash = "sha256:14475042e284991034cb48e06f6851428fb14c4dc953acd9be9a5e95c7b6dd7a"},
