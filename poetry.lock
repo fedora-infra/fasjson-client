@@ -271,7 +271,7 @@ typing-extensions = {version = ">=3.7.4.0", markers = "python_version < \"3.8\""
 
 [[package]]
 name = "gssapi"
-version = "1.7.0"
+version = "1.7.2"
 description = "Python GSSAPI Wrapper"
 category = "main"
 optional = false
@@ -907,7 +907,7 @@ cli = ["click", "cryptography"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "9e60674f6da9a5d6bf2a5fd5cc72bd8924952c46f1216e3e08419a25d010ae16"
+content-hash = "b3e14876a9094b8eb122b45aad6241188ae4fe43a240ced11a5fd7ffadc1a6c3"
 
 [metadata.files]
 alabaster = [
@@ -1109,15 +1109,25 @@ gitpython = [
     {file = "GitPython-3.1.18.tar.gz", hash = "sha256:b838a895977b45ab6f0cc926a9045c8d1c44e2b653c1fcc39fe91f42c6e8f05b"},
 ]
 gssapi = [
-    {file = "gssapi-1.7.0-cp36-cp36m-win32.whl", hash = "sha256:3f8dd4352db5f08f0dea5c2382be70840ebc0f391e3de0d932a158b764be2f4f"},
-    {file = "gssapi-1.7.0-cp36-cp36m-win_amd64.whl", hash = "sha256:1e9bba512b7e731a0f90474866119445ffb2ffba9b8a4f2c54ef71263deab849"},
-    {file = "gssapi-1.7.0-cp37-cp37m-win32.whl", hash = "sha256:de7543e7572ffba32ebaf14606eb27358e243699ab71db15d67dce662f284c33"},
-    {file = "gssapi-1.7.0-cp37-cp37m-win_amd64.whl", hash = "sha256:ea5f1ea7d1caf27184acaa8b284534db9e19633d6be44143f7c6d34e85189ffb"},
-    {file = "gssapi-1.7.0-cp38-cp38-win32.whl", hash = "sha256:98c94f5d4019c35d2c4eda4cd2d9e0eae89b7c25c15cdddff1e8ff75a11eb9aa"},
-    {file = "gssapi-1.7.0-cp38-cp38-win_amd64.whl", hash = "sha256:1ae9a7ad4a2423c5560be849ebcb2d9e61d704d6ee38075c574bdeefb6b29499"},
-    {file = "gssapi-1.7.0-cp39-cp39-win32.whl", hash = "sha256:87bb5714aea7c15fefa40ab4742af8babd5f68cdf14da0a637e1df1c72ebaccd"},
-    {file = "gssapi-1.7.0-cp39-cp39-win_amd64.whl", hash = "sha256:97c1e4119ff1ff90480cec2f229dfef0d08edff83cd734c783b486b4e19a98a8"},
-    {file = "gssapi-1.7.0.tar.gz", hash = "sha256:e7b8ae92033f9b487762f7dc7dbf55616b27cf767c1fc0126cdc88414df4111c"},
+    {file = "gssapi-1.7.2-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:c02a563d7e8b4005ccfc1f6080eaf0805c052876397ea9fb03b7ee725bbbbccc"},
+    {file = "gssapi-1.7.2-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:3d07a74a57cf0df22d0db9452cf500d487736e91cbd21aefffefa3d53e8d8ca2"},
+    {file = "gssapi-1.7.2-cp310-cp310-win32.whl", hash = "sha256:14bde0adcb6fd435021292899f8111396e54c039b47f107e97c40608ee451b84"},
+    {file = "gssapi-1.7.2-cp310-cp310-win_amd64.whl", hash = "sha256:fcde5311a574c2ac314dddaf9608310bd7a4eae3b361ab6374c552428534b51b"},
+    {file = "gssapi-1.7.2-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:2b4b979c075062654a64aeb6faf579f3070d6e52a9c94b10e77eaea0ef88795d"},
+    {file = "gssapi-1.7.2-cp36-cp36m-win32.whl", hash = "sha256:b2b57d01debcaa79b91a9c7e40ccc200cbcae9afe48f15cc54901ddf733b4d91"},
+    {file = "gssapi-1.7.2-cp36-cp36m-win_amd64.whl", hash = "sha256:0b02bbdd850c079b1d453546579fc283f0646f56ff4b39cd3b0e27263a6af97e"},
+    {file = "gssapi-1.7.2-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:145bee55bff2461d2704b958bb6f45f6abf11442efe0f2e7a612f0ab049613f2"},
+    {file = "gssapi-1.7.2-cp37-cp37m-win32.whl", hash = "sha256:b199f59450c4cdc85d7d4f0f35f2b7b7420e536309d0370a5ea0734d56d06e38"},
+    {file = "gssapi-1.7.2-cp37-cp37m-win_amd64.whl", hash = "sha256:20b5365557684856c9b20160b26eaba664afd92a7c098b4bc0c0b2aaf7e5a31c"},
+    {file = "gssapi-1.7.2-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:6ad1df7dd638485402c5b9afef5b7355d855266a09e2f7d55e5f0c8ee0f6a2e7"},
+    {file = "gssapi-1.7.2-cp38-cp38-macosx_11_0_arm64.whl", hash = "sha256:65b2820fd547398c55c69ab6884245b268ea56702f6411149a3be6e520e3efd5"},
+    {file = "gssapi-1.7.2-cp38-cp38-win32.whl", hash = "sha256:5231e3d5d299cefe535a854b7e8d4700775704e75fa33fc3aba1cf83a3e2e7a0"},
+    {file = "gssapi-1.7.2-cp38-cp38-win_amd64.whl", hash = "sha256:33aa276927a82ec630bf580fdd187399062568e699901c33ff8191d3ae9daa4f"},
+    {file = "gssapi-1.7.2-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:fe5e95c88fd737117374223683e319b0d80024f7d176822f14a12be0663cc3d7"},
+    {file = "gssapi-1.7.2-cp39-cp39-macosx_11_0_arm64.whl", hash = "sha256:7123301f368f4198c46c62ee791878e7174fe7eed05c5d602708e0c5ec6774db"},
+    {file = "gssapi-1.7.2-cp39-cp39-win32.whl", hash = "sha256:69983699e9ef39fb7f84b02039d739362fb39959285bb5fdd0efcc19943aa5b3"},
+    {file = "gssapi-1.7.2-cp39-cp39-win_amd64.whl", hash = "sha256:a01dbcd17760cdd77701006105e00a1bd213bd6e189b6602242f175ab488afee"},
+    {file = "gssapi-1.7.2.tar.gz", hash = "sha256:748efbcf7cfb31183cd75e5314493e79fe3521b3ec00d090a77e23f7c75fa59d"},
 ]
 idna = [
     {file = "idna-3.2-py3-none-any.whl", hash = "sha256:14475042e284991034cb48e06f6851428fb14c4dc953acd9be9a5e95c7b6dd7a"},
