@@ -45,7 +45,7 @@ def _load_private_key(path):
         except ValueError as e:
             if e.args:
                 e_str = "\n".join(str(arg) for arg in e.args)
-            else:
+            else:  # pragma: no cover
                 e_str = "unknown error"
             raise click.ClickException(f"can't load the private key: {e_str}")
     return private_key
