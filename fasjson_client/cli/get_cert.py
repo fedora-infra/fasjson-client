@@ -43,7 +43,11 @@ def _load_private_key(path):
                 key_file.read(), password=None, backend=default_backend()
             )
         except ValueError as e:
-            raise click.ClickException("can't load the private key: {!s}".format(e))
+            if e.args:
+                e_str = "\n".join(str(arg) for arg in e.args)
+            else:
+                e_str = "unknown error"
+            raise click.ClickException(f"can't load the private key: {e_str}")
     return private_key
 
 
