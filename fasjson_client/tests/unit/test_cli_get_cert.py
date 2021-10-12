@@ -262,5 +262,5 @@ def test_sign_bad_pkey(invoker, tmp_path, mocker, fixture_dir):
         " The data may be in an incorrect format or it may be encrypted with"
         " an unsupported algorithm.\n",
     )
-    assert result.output in expected_msgs
+    assert any(result.output.startswith(msg) for msg in expected_msgs)
     make_csr.assert_not_called()
