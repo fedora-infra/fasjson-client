@@ -257,10 +257,15 @@ def test_sign_bad_pkey(invoker, tmp_path, mocker, fixture_dir):
     expected_msgs = (
         # cryptography < 3.3
         "Error: can't load the private key: Could not deserialize key data.\n",
-        # cryptography >= 3.3
+        # cryptography >= 3.3, < 3.6
         "Error: can't load the private key: Could not deserialize key data."
         " The data may be in an incorrect format or it may be encrypted with"
         " an unsupported algorithm.\n",
+        # cryptography >= 3.6
+        "Error: can't load the private key: Could not deserialize key data."
+        " The data may be in an incorrect format, it may be encrypted with"
+        " an unsupported algorithm, or it may be an unsupported key type"
+        " (e.g. EC curves with explicit parameters).\n",
     )
     assert any(result.output.startswith(msg) for msg in expected_msgs)
     make_csr.assert_not_called()
