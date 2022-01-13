@@ -378,7 +378,7 @@ format_nongpl = ["idna", "jsonpointer (>1.13)", "webcolors", "rfc3986-validator 
 
 [[package]]
 name = "liccheck"
-version = "0.4.9"
+version = "0.6.4"
 description = "Check python packages from requirement.txt and report issues"
 category = "dev"
 optional = false
@@ -386,7 +386,7 @@ python-versions = ">=2.7"
 
 [package.dependencies]
 configparser = {version = "*", markers = "python_version >= \"3.4\""}
-semantic_version = "*"
+semantic-version = ">=2.7.0"
 toml = "*"
 
 [[package]]
@@ -912,7 +912,7 @@ cli = ["click", "cryptography"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6"
-content-hash = "43e25503a6e51521ec1979ad054d04295e9eaa8f71183870e0c3b1026779f2f7"
+content-hash = "a3fd045edb8cb1c91e9009d2f0d02966ec93c40d05548e86d246856e71954cf0"
 
 [metadata.files]
 alabaster = [
@@ -1174,7 +1174,8 @@ jsonschema = [
     {file = "jsonschema-3.2.0.tar.gz", hash = "sha256:c8a85b28d377cc7737e46e2d9f2b4f44ee3c0e1deac6bf46ddefc7187d30797a"},
 ]
 liccheck = [
-    {file = "liccheck-0.4.9.tar.gz", hash = "sha256:6ee9d9f66eca94218a2c2053fcac6dd8bcdb2ea1c418ffe4a4b58bbc7917556a"},
+    {file = "liccheck-0.6.4-py2.py3-none-any.whl", hash = "sha256:ee490972239413c7087d9f7f60a43d03943f768162000a3f9d5bf0e82ed098b1"},
+    {file = "liccheck-0.6.4.tar.gz", hash = "sha256:049b53fab91813182ea1073cf1a53ba63eed8cbccb792942989935253ca3dffb"},
 ]
 markupsafe = [
     {file = "MarkupSafe-2.0.1-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:d8446c54dc28c01e5a2dbac5a25f071f6653e6e40f3a8818e8b45d790fe6ef53"},

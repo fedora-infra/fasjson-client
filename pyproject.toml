@@ -51,7 +51,7 @@ requests-mock = "^1.7"
 sphinx = "^3.0.2"
 sphinxcontrib-httpdomain = "^1.7.0"
 bandit = "^1.6.2"
-liccheck = "^0.4.2"
+liccheck = "^0.6.4"
 black = "^19.10b0"
 
 [tool.poetry.extras]
@@ -70,10 +70,16 @@ authorized_licenses = [
   "apache 2.0",
   "apache software",
   "Apache License 2.0",
-  "gnu lgpl",
   "gpl v2",
   "GNU General Public License v2 or later (GPLv2+)",
   "gpl v3",
+  "GNU GPLv3+",
+  "GNU General Public License v3 (GPLv3)",
+  "GNU General Public License v3 or later (GPLv3+)",
+  "lgpl",
+  "gnu lgpl",
+  "GNU Library or Lesser General Public License (LGPL)",
+  "GNU Lesser General Public License v3 or later (LGPLv3+)",
   "lgpl with exceptions or zpl",
   "isc",
   "isc license (iscl)",
@@ -82,12 +88,10 @@ authorized_licenses = [
   "zpl 2.1",
   "mpl-2.0",
   "MPL 2.0",
-  "lgpl",
+  "Mozilla Public License 2.0 (MPL 2.0)",
   "wtfpl",
-  "GNU GPLv3+",
-  "GNU General Public License v3 (GPLv3)",
-  "GNU Lesser General Public License v3 or later (LGPLv3+)",
   "Apache License, Version 2.0",
+  "Zope Public",
 ]
 
 [build-system]
