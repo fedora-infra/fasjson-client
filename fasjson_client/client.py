@@ -59,7 +59,9 @@ class Client:
             )
         try:
             api = SwaggerClient.from_url(
-                self._spec_url, http_client=http_client, config=self._bravado_config,
+                self._spec_url,
+                http_client=http_client,
+                config=self._bravado_config,
             )
         except (HTTPError, RequestException) as e:
             data = {

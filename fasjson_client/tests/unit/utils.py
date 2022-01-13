@@ -6,7 +6,11 @@ import requests_mock
 
 class FasJsonMock:
     def __init__(
-        self, spec, url, api_version=1, principal="dummy@EXAMPLE.TEST",
+        self,
+        spec,
+        url,
+        api_version=1,
+        principal="dummy@EXAMPLE.TEST",
     ):
         self.spec = spec
         self.url = url

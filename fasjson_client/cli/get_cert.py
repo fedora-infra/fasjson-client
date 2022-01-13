@@ -91,7 +91,8 @@ def _make_csr(username, private_key):
         x509.Name([x509.NameAttribute(NameOID.COMMON_NAME, username)])
     )
     builder = builder.add_extension(
-        x509.BasicConstraints(ca=False, path_length=None), critical=True,
+        x509.BasicConstraints(ca=False, path_length=None),
+        critical=True,
     )
     request = builder.sign(private_key, hashes.SHA256(), default_backend())
     return request
@@ -183,7 +184,11 @@ def _write_certificate(cert, path):
 
 
 @click.option(
-    "-u", "--username", default=None, show_default=True, help="Your FAS username.",
+    "-u",
+    "--username",
+    default=None,
+    show_default=True,
+    help="Your FAS username.",
 )
 @click.option(
     "-p",
@@ -192,7 +197,10 @@ def _write_certificate(cert, path):
     help="The path to the private key. If it does not exist, it will be generated.",
 )
 @click.option(
-    "-s", "--save-to", type=click.Path(), help="The path to save your certificate to.",
+    "-s",
+    "--save-to",
+    type=click.Path(),
+    help="The path to save your certificate to.",
 )
 @click.option(
     "--overwrite",

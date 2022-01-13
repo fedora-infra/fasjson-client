@@ -24,8 +24,7 @@ class ResponseWrapper:
         self.operation = operation
 
     def __getattr__(self, name):
-        """Forward requests for attrs not found on this decorator to the delegate.
-        """
+        """Forward requests for attrs not found on this decorator to the delegate."""
         return getattr(self.operation, name)
 
     def __call__(self, **kwargs):

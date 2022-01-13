@@ -51,7 +51,10 @@ def test_api_error(server):
 
 def test_api_error_text(server):
     server.mock_endpoint(
-        "/me/", status_code=500, reason="Server Error", text="Internal Server Error",
+        "/me/",
+        status_code=500,
+        reason="Server Error",
+        text="Internal Server Error",
     )
     with pytest.raises(APIError) as e:
         client = Client("http://example.com/fasjson")

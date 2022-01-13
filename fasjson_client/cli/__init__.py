@@ -45,10 +45,14 @@ def _register_subcommand(group, module_name, command_name=None):
 
 @click.group()
 @click.option(
-    "-c", "--config", "config_path", help="Path to the configuration file",
+    "-c",
+    "--config",
+    "config_path",
+    help="Path to the configuration file",
 )
 @click.option(
-    "--url", help="URL to the FASJSON instance",
+    "--url",
+    help="URL to the FASJSON instance",
 )
 @click.option("--verbose", is_flag=True, default=False, help="Print more information")
 @click.option("--quiet", is_flag=True, default=False, help="Print less information")
