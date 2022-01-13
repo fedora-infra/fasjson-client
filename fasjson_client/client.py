@@ -1,7 +1,7 @@
 import errno
 from urllib.parse import urljoin, urlsplit
 
-from requests.exceptions import RequestException
+from requests.exceptions import InvalidJSONError, RequestException
 from bravado import requests_client
 from bravado.client import SwaggerClient, CallableOperation
 from bravado.exception import HTTPError
@@ -63,6 +63,10 @@ class Client:
                 http_client=http_client,
                 config=self._bravado_config,
             )
+        except (ValueError, InvalidJSONError) as e:
+            raise ClientSetupError(
+                "remote data validation failed", errno.EPROTO, data={"exc": e}
+            )
         except (HTTPError, RequestException) as e:
             data = {
                 "exc": e,
@@ -78,10 +82,6 @@ class Client:
         except SwaggerValidationError as e:
             raise ClientSetupError(
                 "schema validation failed", errno.EPROTO, data={"exc": e}
-            )
-        except ValueError as e:
-            raise ClientSetupError(
-                "remote data validation failed", errno.EPROTO, data={"exc": e}
             )
         return api
 

@@ -14,7 +14,7 @@ def test_client_normalize_url(mocker):
 
 def test_client_wrong_url(mocker):
     mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
-    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
+    with requests_mock.Mocker() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", status_code=404, reason="Not Found")
         Client("http://example.com/")
     err = e.value
@@ -47,7 +47,7 @@ def test_client_auth(mocker):
 
 def test_client_spec_parse_error(mocker):
     mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
-    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
+    with requests_mock.Mocker() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", text="{somethin: {wrong:")
         Client("http://example.com")
     err = e.value
@@ -58,7 +58,7 @@ def test_client_spec_parse_error(mocker):
 
 def test_client_spec_invalid(mocker):
     mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
-    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
+    with requests_mock.Mocker() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", text='{"foo": "bar"}')
         Client("http://example.com")
     err = e.value
@@ -69,7 +69,7 @@ def test_client_spec_invalid(mocker):
 
 def test_client_conn_error(mocker):
     mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
-    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
+    with requests_mock.Mocker() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get(
             "http://example.com/specs/v1.json",
             exc=requests.exceptions.ConnectTimeout("A timeout occurred"),
@@ -85,7 +85,7 @@ def test_client_conn_error(mocker):
 
 def test_client_response_error(mocker):
     mocker.patch("fasjson_client.client.GssapiAuthenticator", return_value=None)
-    with requests_mock.mock() as m, pytest.raises(errors.ClientSetupError) as e:
+    with requests_mock.Mocker() as m, pytest.raises(errors.ClientSetupError) as e:
         m.get("http://example.com/specs/v1.json", reason="Forbidden", status_code=403)
         Client("http://example.com")
     err = e.value
