@@ -24,10 +24,22 @@ actions:
         - "poetry version -s"
 
 jobs:
-    job: copr_build
+
+  - job: copr_build
+    trigger: pull_request
+    metadata:
+      targets:
+        - fedora-35
+
+  - job: tests
+    trigger: pull_request
+    metadata:
+      targets:
+        - fedora-35
+
+  - job: copr_build
     trigger: release
     metadata:
-        targets:
-            - fedora-35
-        owner: scoady
-        project: fasjson-client
+      targets:
+        - fedora-35
+      project: fasjson-client
