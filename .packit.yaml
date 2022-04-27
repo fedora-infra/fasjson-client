@@ -22,7 +22,6 @@ actions:
         - "sh -c 'echo dist/fasjson-client-$(poetry version -s).tar.gz'"
     get-current-version:
         - "poetry version -s"
-    post-upstream-clone: "wget https://src.fedoraproject.org/rpms/python-fasjson-client/raw/main/f/python-fasjson-client.spec -O python-fasjson-client.spec"
 
 jobs:
     job: copr_build
