@@ -42,4 +42,5 @@ jobs:
     metadata:
       targets:
         - fedora-35
+      owner: scoady 
       project: fasjson-client
