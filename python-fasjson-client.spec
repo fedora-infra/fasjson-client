@@ -15,7 +15,7 @@
 %endif
 
 Name:           python-%{pypi_name}
-Version:        1.0.6
+Version:        1.0.7
 Release:        %autorelease
 Summary:        An OpenAPI client for FASJSON
 
