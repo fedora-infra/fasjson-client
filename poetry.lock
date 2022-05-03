@@ -548,7 +548,7 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "pytest"
-version = "6.2.5"
+version = "7.0.1"
 description = "pytest: simple powerful testing with Python"
 category = "dev"
 optional = false
@@ -563,10 +563,10 @@ iniconfig = "*"
 packaging = "*"
 pluggy = ">=0.12,<2.0"
 py = ">=1.8.2"
-toml = "*"
+tomli = ">=1.0.0"
 
 [package.extras]
-testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
+testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "pygments (>=2.7.2)", "requests", "xmlschema"]
 
 [[package]]
 name = "pytest-cov"
@@ -724,18 +724,19 @@ python-versions = "*"
 
 [[package]]
 name = "sphinx"
-version = "3.5.4"
+version = "4.5.0"
 description = "Python documentation generator"
 category = "dev"
 optional = false
-python-versions = ">=3.5"
+python-versions = ">=3.6"
 
 [package.dependencies]
 alabaster = ">=0.7,<0.8"
 babel = ">=1.3"
 colorama = {version = ">=0.3.5", markers = "sys_platform == \"win32\""}
-docutils = ">=0.12,<0.17"
+docutils = ">=0.14,<0.18"
 imagesize = "*"
+importlib-metadata = {version = ">=4.4", markers = "python_version < \"3.10\""}
 Jinja2 = ">=2.3"
 packaging = "*"
 Pygments = ">=2.0"
@@ -743,14 +744,14 @@ requests = ">=2.5.0"
 snowballstemmer = ">=1.1"
 sphinxcontrib-applehelp = "*"
 sphinxcontrib-devhelp = "*"
-sphinxcontrib-htmlhelp = "*"
+sphinxcontrib-htmlhelp = ">=2.0.0"
 sphinxcontrib-jsmath = "*"
 sphinxcontrib-qthelp = "*"
-sphinxcontrib-serializinghtml = "*"
+sphinxcontrib-serializinghtml = ">=1.1.5"
 
 [package.extras]
 docs = ["sphinxcontrib-websupport"]
-lint = ["flake8 (>=3.5.0)", "isort", "mypy (>=0.800)", "docutils-stubs"]
+lint = ["flake8 (>=3.5.0)", "isort", "mypy (>=0.931)", "docutils-stubs", "types-typed-ast", "types-requests"]
 test = ["pytest", "pytest-cov", "html5lib", "cython", "typed-ast"]
 
 [[package]]
@@ -940,7 +941,7 @@ cli = ["click", "cryptography"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.6.2"
-content-hash = "a3fd045edb8cb1c91e9009d2f0d02966ec93c40d05548e86d246856e71954cf0"
+content-hash = "4444bcde27d2f4601009bc35277be1f429b6253085e578fb149aaca20de9883b"
 
 [metadata.files]
 alabaster = [
@@ -1414,8 +1415,8 @@ pyrsistent = [
     {file = "pyrsistent-0.18.0.tar.gz", hash = "sha256:773c781216f8c2900b42a7b638d5b517bb134ae1acbebe4d1e8f1f41ea60eb4b"},
 ]
 pytest = [
-    {file = "pytest-6.2.5-py3-none-any.whl", hash = "sha256:7310f8d27bc79ced999e760ca304d69f6ba6c6649c0b60fb0e04a4a77cacc134"},
-    {file = "pytest-6.2.5.tar.gz", hash = "sha256:131b36680866a76e6781d13f101efb86cf674ebb9762eb70d3082b6f29889e89"},
+    {file = "pytest-7.0.1-py3-none-any.whl", hash = "sha256:9ce3ff477af913ecf6321fe337b93a2c0dcf2a0a1439c43f5452112c1e4280db"},
+    {file = "pytest-7.0.1.tar.gz", hash = "sha256:e30905a0c131d3d94b89624a1cc5afec3e0ba2fbdb151867d8e0ebd49850f171"},
 ]
 pytest-cov = [
     {file = "pytest-cov-3.0.0.tar.gz", hash = "sha256:e7f0f5b1617d2210a2cabc266dfe2f4c75a8d32fb89eafb7ad9d06f6d076d470"},
@@ -1563,8 +1564,8 @@ snowballstemmer = [
     {file = "snowballstemmer-2.2.0.tar.gz", hash = "sha256:09b16deb8547d3412ad7b590689584cd0fe25ec8db3be37788be3810cbf19cb1"},
 ]
 sphinx = [
-    {file = "Sphinx-3.5.4-py3-none-any.whl", hash = "sha256:2320d4e994a191f4b4be27da514e46b3d6b420f2ff895d064f52415d342461e8"},
-    {file = "Sphinx-3.5.4.tar.gz", hash = "sha256:19010b7b9fa0dc7756a6e105b2aacd3a80f798af3c25c273be64d7beeb482cb1"},
+    {file = "Sphinx-4.5.0-py3-none-any.whl", hash = "sha256:ebf612653238bcc8f4359627a9b7ce44ede6fdd75d9d30f68255c7383d3a6226"},
+    {file = "Sphinx-4.5.0.tar.gz", hash = "sha256:7bf8ca9637a4ee15af412d1a1d9689fec70523a68ca9bb9127c2f3eeb344e2e6"},
 ]
 sphinxcontrib-applehelp = [
     {file = "sphinxcontrib-applehelp-1.0.2.tar.gz", hash = "sha256:a072735ec80e7675e3f432fcae8610ecf509c5f1869d17e2eecff44389cdbc58"},
