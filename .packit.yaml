@@ -3,6 +3,8 @@
 
 specfile_path: python-fasjson-client.spec
 
+issue_repository: https://github.com/fedora-infra/fasjson-client
+
 # add or remove files that should be synced
 files_to_sync:
     - python-fasjson-client.spec
