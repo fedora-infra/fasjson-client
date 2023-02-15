@@ -1,7 +1,18 @@
 import errno
 from urllib.parse import urljoin, urlsplit
 
-from requests.exceptions import InvalidJSONError, RequestException
+from requests.exceptions import RequestException
+
+# InvalidJSONError was added in requests 2.26.0.  RHEL 9 only has requests
+# 2.25.1.  If we can't import it, define it ourselves.
+try:
+    from requests.exceptions import InvalidJSONError
+except ImportError:  # pragma: no cover
+
+    class InvalidJSONError(RequestException):
+        pass
+
+
 from bravado import requests_client
 from bravado.client import SwaggerClient, CallableOperation
 from bravado.exception import HTTPError
