@@ -10,6 +10,7 @@ from swagger_spec_validator.common import SwaggerValidationError
 from .gss_http import GssapiAuthenticator
 from .errors import ClientSetupError
 from .response import ResponseWrapper
+from .formats import mask_format
 
 
 class Client:
@@ -34,6 +35,9 @@ class Client:
         self._bravado_config = bravado_config or {}
         self._auth = auth
         # self._bravado_config.setdefault("disable_fallback_results", True)
+        # Register the mask format
+        self._bravado_config.setdefault("formats", []).append(mask_format)
+
         self._api = self._make_bravado_client()
         self._ops = self._make_ops_map()
 
