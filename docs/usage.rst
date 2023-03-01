@@ -104,6 +104,26 @@ which return the same class of objects::
    [{'username': 'user3', [...]}, {'username': 'user4', [...]}]
 
 
+.. _fields-label:
+
+Selecting attributes
+--------------------
+
+You can select which attributes you want to get from the server using the
+``X-Fields`` header. The header is given as a list of attribute names::
+
+   >>> from fasjson_client import Client
+   >>> c = Client('http://fasjson.example.com')
+   >>> response = c.list_users(
+   ...     page_size=1,
+   ...     _request_options={
+   ...         "headers": {"X-Fields": ["username", "emails"]}
+   ...     }
+   ... )
+   >>> response.result
+   [{'username': 'user1', 'emails': ['user1@example.com']}]
+
+
 Command line
 ------------
 
