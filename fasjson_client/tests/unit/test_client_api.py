@@ -111,3 +111,13 @@ def test_list_all_entities_wrong_name(server):
     client = Client("http://example.com/fasjson")
     with pytest.raises(ValueError):
         list(client.list_all_entities("foobar"))
+
+
+def test_list_entities_headers(server):
+    server.mock_endpoint("/users/", [{"json": {"result": [], "page": {"page_number": 1, "page_size": 2, "total_pages": 1}}}], method="GET")
+    client = Client("http://example.com/fasjson")
+    result = client.list_all_entities("users", page_size=2, _request_options={"headers": {"X-Test": "foobar", "X-Fields": "foobar"}})
+    assert list(result) == []
+    req = server.reqs.request_history[-1]
+    assert req.headers.get("X-Test") == "foobar"
+    assert req.headers.get("X-Fields") == "foobar"
