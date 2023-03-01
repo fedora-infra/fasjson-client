@@ -94,7 +94,7 @@ autodoc_mock_imports = ["gssapi", "requests_gssapi"]
 intersphinx_mapping = {"python": ("https://docs.python.org/3", None)}
 
 extlinks = {
-    "commit": ("https://github.com/fedora-infra/fasjson-client/commit/%s", ""),
-    "issue": ("https://github.com/fedora-infra/fasjson-client/issues/%s", "#"),
-    "pr": ("https://github.com/fedora-infra/fasjson-client/pull/%s", "PR#"),
+    "commit": ("https://github.com/fedora-infra/fasjson-client/commit/%s", "%s"),
+    "issue": ("https://github.com/fedora-infra/fasjson-client/issues/%s", "#%s"),
+    "pr": ("https://github.com/fedora-infra/fasjson-client/pull/%s", "PR#%s"),
 }
