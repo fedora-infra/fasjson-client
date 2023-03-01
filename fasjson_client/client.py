@@ -98,7 +98,7 @@ class Client:
         except KeyError:
             raise AttributeError("No such operation: {!r}".format(name))
 
-    def list_all_entities(self, entity_name, page_size=1000):
+    def list_all_entities(self, entity_name, page_size=1000, **kwargs):
         try:
             operation = self._ops["list_{}".format(entity_name)]
         except KeyError:
@@ -109,6 +109,6 @@ class Client:
         next_page_exists = True
         while next_page_exists:
             page_number += 1
-            response = operation(page_size=page_size, page_number=page_number)
+            response = operation(page_size=page_size, page_number=page_number, **kwargs)
             yield from response.result
             next_page_exists = page_number < response.page["total_pages"]
