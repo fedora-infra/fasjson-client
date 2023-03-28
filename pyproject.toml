@@ -94,6 +94,7 @@ authorized_licenses = [
   "wtfpl",
   "Apache License, Version 2.0",
   "Zope Public",
+  "The Unlicense (Unlicense)",
 ]
 
 [build-system]
