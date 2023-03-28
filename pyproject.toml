@@ -53,6 +53,8 @@ sphinxcontrib-httpdomain = "*"
 bandit = "*"
 liccheck = "*"
 black = "*"
+# For the licenses check, follow Poetry's dep
+platformdirs = "^2.5.2"
 
 [tool.poetry.extras]
 cli = ["click", "cryptography"]
