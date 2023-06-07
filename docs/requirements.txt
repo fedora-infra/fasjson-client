@@ -9,7 +9,7 @@ decorator==5.0.9
 idna==3.4
 importlib-metadata==4.5.0
 jsonpointer==2.1
-jsonref==0.2
+jsonref==1.1.0
 jsonschema==4.17.3
 monotonic==1.6
 msgpack==1.0.2
