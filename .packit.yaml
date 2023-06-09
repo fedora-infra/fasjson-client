@@ -32,6 +32,13 @@ actions:
 
 jobs:
   # upon upstream PRs, perform copr builds
+  - job: copr_build
+    trigger: pull_request
+    metadata:
+      targets:
+        - fedora-latest-stable
+        - fedora-development
+
   - job: tests
     trigger: pull_request
     metadata:
