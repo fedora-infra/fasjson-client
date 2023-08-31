@@ -16,9 +16,14 @@ try:
 
     release = fasjson_client.__version__
 except ImportError:
-    import toml
+    try:
+        import tomllib
+    except ImportError:
+        # Python < 3.11
+        import tomli as tomllib
 
-    pyproject = toml.load(os.path.join(topdir, "pyproject.toml"))
+    with open(os.path.join(topdir, "pyproject.toml"), "rb") as f:
+        pyproject = tomllib.load(f)
     release = pyproject["tool"]["poetry"]["version"]
 
 
