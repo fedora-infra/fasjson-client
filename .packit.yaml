@@ -17,18 +17,18 @@ downstream_package_name: python-fasjson-client
 upstream_tag_template: v{version}
 
 srpm_build_deps:
-  - wget
+  - curl
 
 actions:
-    create-archive:
-        - "poetry build -f sdist"
-        - "sh -c 'echo dist/fasjson-client-$(poetry version -s).tar.gz'"
-    get-current-version:
-        - "poetry version -s"
     post-upstream-clone:
-        - "wget https://src.fedoraproject.org/rpms/python-fasjson-client/raw/main/f/python-fasjson-client.spec -O python-fasjson-client.spec"
-        - "curl -sSL https://install.python-poetry.org | python3 -"
-        - "poetry --version"
+        - "curl https://src.fedoraproject.org/rpms/python-fasjson-client/raw/main/f/python-fasjson-client.spec -o python-fasjson-client.spec"
+        - "sh -c 'curl -sSL https://install.python-poetry.org | python3 -'"
+        - "/builddir/.local/bin/poetry --version"
+    create-archive:
+        - "/builddir/.local/bin/poetry build -f sdist"
+        - "sh -c 'echo dist/fasjson_client-$(/builddir/.local/bin/poetry version -s).tar.gz'"
+    get-current-version:
+        - "/builddir/.local/bin/poetry version -s"
 
 jobs:
   # upon upstream PRs, perform copr builds
