@@ -27,7 +27,11 @@ import logging
 import os
 from collections.abc import MutableMapping
 
-import toml
+try:
+    import tomllib
+except ImportError:
+    # Python < 3.11
+    import tomli as tomllib
 
 from .errors import ConfigurationException
 
@@ -144,13 +148,12 @@ class LazyConfig(MutableMapping):
                 continue
             _log.info("Loading configuration from {}".format(config_path))
             try:
-                file_config = toml.load(config_path)
+                with open(config_path, "rb") as f:
+                    file_config = tomllib.load(f)
                 for key in file_config:
                     config[key.lower()] = file_config[key]
-            except toml.TomlDecodeError as e:
-                msg = "Failed to parse {}: error at line {}, column {}: {}".format(
-                    config_path, e.lineno, e.colno, e.msg
-                )
+            except tomllib.TOMLDecodeError as e:
+                msg = "Failed to parse {}: {}".format(config_path, e)
                 raise ConfigurationException(msg)
 
         self.update(config)

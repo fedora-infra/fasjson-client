@@ -1,7 +1,12 @@
 import os
 
 import pytest
-import toml
+
+try:
+    import tomllib
+except ImportError:
+    # Python < 3.11
+    import tomli as tomllib
 
 from fasjson_client.cli import cli
 from fasjson_client.config import LazyConfig, DEFAULTS, VALIDATORS
@@ -91,7 +96,7 @@ def test_config_unknown_value(conf):
 
 
 def test_config_load_paths(conf, mocker, tmpdir):
-    toml_load = mocker.spy(toml, "load")
+    toml_load = mocker.spy(tomllib, "load")
     validate_method = mocker.patch.object(conf, "_validate")
     conf._load_paths = [
         os.path.join(tmpdir, "first.toml"),
@@ -106,7 +111,7 @@ def test_config_load_paths(conf, mocker, tmpdir):
 
     conf.load_config()
 
-    loaded = [call[0][0] for call in toml_load.call_args_list]
+    loaded = [call[0][0].name for call in toml_load.call_args_list]
     assert loaded == conf._load_paths[0:2]
     validate_method.assert_called_with()
     # Make sure the last value prevailed
@@ -114,32 +119,34 @@ def test_config_load_paths(conf, mocker, tmpdir):
 
 
 def test_config_load_one(conf, mocker, tmpdir):
-    toml = mocker.patch("fasjson_client.config.toml")
-    toml.load.return_value = {"foo": "bar"}
+    tomllib = mocker.patch("fasjson_client.config.tomllib")
+    tomllib.load.return_value = {"foo": "bar"}
     validate_method = mocker.patch.object(conf, "_validate")
     config_path = os.path.join(tmpdir, "config.toml")
     open(config_path, "w").close()
 
     conf.load_config(config_path)
 
-    toml.load.assert_called_once_with(config_path)
+    tomllib.load.assert_called_once()
+    assert tomllib.load.call_args_list[0][0][0].name == config_path
     validate_method.assert_called_with()
     assert conf["foo"] == "bar"
 
 
 def test_config_load_env(conf, mocker, config_env_var):
-    toml = mocker.patch("fasjson_client.config.toml")
-    toml.load.return_value = {}
+    tomllib = mocker.patch("fasjson_client.config.tomllib")
+    tomllib.load.return_value = {}
     validate_method = mocker.patch.object(conf, "_validate")
 
     conf.load_config()
 
-    toml.load.assert_called_once_with(config_env_var)
+    tomllib.load.assert_called_once()
+    assert tomllib.load.call_args_list[0][0][0].name == config_env_var
     validate_method.assert_called_with()
 
 
 def test_config_load_one_does_not_exist(conf, mocker, tmpdir):
-    toml = mocker.patch("fasjson_client.config.toml")
+    tomllib = mocker.patch("fasjson_client.config.tomllib")
     validate_method = mocker.patch.object(conf, "_validate")
     config_path = os.path.join(tmpdir, "config.toml")
     # Don't create the file
@@ -151,7 +158,7 @@ def test_config_load_one_does_not_exist(conf, mocker, tmpdir):
     )
     assert e.value.message == expected_msg
 
-    toml.load.assert_not_called()
+    tomllib.load.assert_not_called()
     validate_method.assert_not_called()
 
 
@@ -163,8 +170,8 @@ def test_config_load_one_invalid(conf, mocker, tmpdir):
     with pytest.raises(ConfigurationException) as e:
         conf.load_config(config_path)
     expected_msg = (
-        "Failed to parse {}: error at line 1, column 8: Key name found without value. "
-        "Reached end of file."
+        "Failed to parse {}: Expected '=' after a key in a key/value pair "
+        "(at end of document)"
     ).format(config_path)
     assert e.value.message == expected_msg
 
