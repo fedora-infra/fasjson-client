@@ -42,7 +42,7 @@ click = {version = "^6.7 || ^7 || ^8", optional = true}
 tomli = {version = "*", python = "<3.11"}
 
 [tool.poetry.dev-dependencies]
-coverage = "*"
+coverage = {version = "*", extras = ["toml"]}
 flake8 = "*"
 pytest = "*"
 pytest-cov = "*"
@@ -60,6 +60,28 @@ cli = ["click", "cryptography"]
 [tool.poetry.scripts]
 fasjson-client = 'fasjson_client.cli:cli'
 
+
+[tool.coverage.run]
+branch = true
+parallel = true
+source = ["fasjson_client"]
+
+[tool.coverage.paths]
+source = [
+   "fasjson_client",
+   ".tox/*/site-packages/fasjson_client",
+]
+
+[tool.coverage.report]
+fail_under = 100
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+]
+omit = [
+    "fasjson_client/tests/*",
+    "fasjson_client/__init__.py",
+]
 
 [tool.liccheck]
 authorized_licenses = [
