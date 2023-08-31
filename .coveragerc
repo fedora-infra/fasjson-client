@@ -1,6 +1,7 @@
 [run]
 branch = True
 source = fasjson_client
+parallel = True
 
 [paths]
 source =
