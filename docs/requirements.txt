@@ -25,6 +25,6 @@ strict-rfc3339==0.7
 swagger-spec-validator==3.0.3
 toml==0.10.2
 typing-extensions==4.9.0
-urllib3==2.1.0
+urllib3==2.2.0
 webcolors==1.13
 zipp==3.17.0
