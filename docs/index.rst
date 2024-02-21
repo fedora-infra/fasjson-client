@@ -29,3 +29,12 @@ on open-api specs (version 2.0).
    :caption: Contributor Guide
 
    contributing
+
+
+.. Release Notes
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Release Notes
+
+   release_notes

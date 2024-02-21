@@ -32,7 +32,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7.0"
+python = "^3.8.0"
 gssapi = "^1.5.1"
 bravado = "^10.6.0 || ^11"
 requests = "^2.20.0"
@@ -53,6 +53,10 @@ sphinxcontrib-httpdomain = "*"
 bandit = "*"
 liccheck = "*"
 black = "*"
+towncrier = "^23.11.0"
+setuptools = "^69.1.0"
+myst-parser = "^2.0.0"
+
 
 [tool.poetry.extras]
 cli = ["click", "cryptography"]
@@ -120,3 +124,53 @@ authorized_licenses = [
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.towncrier]
+package = "fasjson_client"
+filename = "docs/release_notes.md"
+directory = "news/"
+start_string = "<!-- towncrier release notes start -->\n"
+underlines = ["", "", ""]
+template = "news/_template.md.j2"
+title_format = "## v{version}"
+issue_format = "{issue}"
+
+  [[tool.towncrier.type]]
+  directory = "bic"
+  name = "Backwards Incompatible Changes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "dependency"
+  name = "Dependency Changes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "feature"
+  name = "Features"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "bug"
+  name = "Bug Fixes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "dev"
+  name = "Development Improvements"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "docs"
+  name = "Documentation Improvements"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "other"
+  name = "Other Changes"
+  showcontent = true
+
+  [[tool.towncrier.type]]
+  directory = "author"
+  name = "Contributors"
+  showcontent = true

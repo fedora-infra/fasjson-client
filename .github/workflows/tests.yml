@@ -42,9 +42,9 @@ jobs:
     strategy:
       matrix:
         tox_env:
-          - py37
           - py38
           - py39
           - py310
           - py311
+          - py312
     runs-on: ubuntu-latest
