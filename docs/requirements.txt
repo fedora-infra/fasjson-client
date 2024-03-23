@@ -7,14 +7,14 @@ click==8.1.7
 colorama==0.4.6
 decorator==5.1.1
 idna==3.6
-importlib-metadata==7.0.1
+importlib-metadata==7.1.0
 jsonpointer==2.4
 jsonref==1.1.0
 jsonschema==4.21.1
 monotonic==1.6
-msgpack==1.0.7
+msgpack==1.0.8
 pyrsistent==0.20.0
-python-dateutil==2.8.2
+python-dateutil==2.9.0.post0
 pytz==2024.1
 pyyaml==6.0.1
 requests==2.31.0
@@ -24,7 +24,7 @@ six==1.16.0
 strict-rfc3339==0.7
 swagger-spec-validator==3.0.3
 toml==0.10.2
-typing-extensions==4.9.0
+typing-extensions==4.10.0
 urllib3==2.2.1
 webcolors==1.13
-zipp==3.17.0
+zipp==3.18.1
