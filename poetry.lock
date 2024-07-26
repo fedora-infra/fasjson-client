@@ -659,18 +659,21 @@ testing = ["jaraco.test (>=5.4)", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "p
 
 [[package]]
 name = "incremental"
-version = "22.10.0"
-description = "\"A small library that versions your Python projects.\""
+version = "24.7.0"
+description = "A small library that versions your Python projects."
 optional = false
-python-versions = "*"
+python-versions = ">=3.8"
 files = [
-    {file = "incremental-22.10.0-py2.py3-none-any.whl", hash = "sha256:b864a1f30885ee72c5ac2835a761b8fe8aa9c28b9395cacf27286602688d3e51"},
-    {file = "incremental-22.10.0.tar.gz", hash = "sha256:912feeb5e0f7e0188e6f42241d2f450002e11bbc0937c65865045854c24c0bd0"},
+    {file = "incremental-24.7.0-py3-none-any.whl", hash = "sha256:6ac3c74ae4586cc68bd4adc060619779aaf1262d3581aab75f82c9f311458a99"},
+    {file = "incremental-24.7.0.tar.gz", hash = "sha256:530255006a8c283d3ad29f30468efc6d5d95747afd0b52a4e4a4ded6348d88f8"},
 ]
 
+[package.dependencies]
+setuptools = ">=61.0"
+tomli = {version = "*", markers = "python_version < \"3.11\""}
+
 [package.extras]
-mypy = ["click (>=6.0)", "mypy (==0.812)", "twisted (>=16.4.0)"]
-scripts = ["click (>=6.0)", "twisted (>=16.4.0)"]
+scripts = ["click (>=6.0)"]
 
 [[package]]
 name = "iniconfig"
