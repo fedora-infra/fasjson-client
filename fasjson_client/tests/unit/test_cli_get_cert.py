@@ -266,6 +266,13 @@ def test_sign_bad_pkey(invoker, tmp_path, mocker, fixture_dir):
         " The data may be in an incorrect format, it may be encrypted with"
         " an unsupported algorithm, or it may be an unsupported key type"
         " (e.g. EC curves with explicit parameters).\n",
+        # cryptography >= 43
+        "Error: can't load the private key: Could not deserialize key data."
+        " The data may be in an incorrect format, the provided password may be"
+        " incorrect, it may be encrypted with an unsupported algorithm, or it"
+        " may be an unsupported key type (e.g. EC curves with explicit"
+        " parameters).\n",
     )
+    print(result.output)
     assert any(result.output.startswith(msg) for msg in expected_msgs)
     make_csr.assert_not_called()
