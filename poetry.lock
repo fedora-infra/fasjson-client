@@ -659,13 +659,13 @@ testing = ["jaraco.test (>=5.4)", "pytest (>=6)", "pytest-checkdocs (>=2.4)", "p
 
 [[package]]
 name = "incremental"
-version = "24.7.1"
+version = "24.7.2"
 description = "A small library that versions your Python projects."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "incremental-24.7.1-py3-none-any.whl", hash = "sha256:fdec6e533d06fd5497080fad4d8b78416c98801588551c9e620409940e8745f7"},
-    {file = "incremental-24.7.1.tar.gz", hash = "sha256:a3717c20534499835555ba727b32ee087945ba9daaf23851471dfe3d1e3d1698"},
+    {file = "incremental-24.7.2-py3-none-any.whl", hash = "sha256:8cb2c3431530bec48ad70513931a760f446ad6c25e8333ca5d95e24b0ed7b8fe"},
+    {file = "incremental-24.7.2.tar.gz", hash = "sha256:fb4f1d47ee60efe87d4f6f0ebb5f70b9760db2b2574c59c8e8912be4ebd464c9"},
 ]
 
 [package.dependencies]
