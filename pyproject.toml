@@ -54,7 +54,7 @@ bandit = "*"
 liccheck = "*"
 black = "*"
 towncrier = "^23.11.0"
-setuptools = "^69.1.0 || ^70.0.0 || ^71.0.0"
+setuptools = "^69.1.0 || ^70.0.0 || ^71.0.0 || ^72.0.0"
 myst-parser = "^2.0.0 || ^3.0.0"
 
 
