@@ -1,4 +1,4 @@
-attrs==23.2.0
+attrs==24.1.0
 bravado-core==6.1.1
 bravado==11.0.3
 certifi==2024.7.4
