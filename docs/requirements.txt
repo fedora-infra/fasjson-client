@@ -12,7 +12,7 @@ jsonpointer==3.0.0
 jsonref==1.1.0
 jsonschema==4.23.0
 monotonic==1.6
-msgpack==1.0.8
+msgpack==1.1.0
 pyrsistent==0.20.0
 python-dateutil==2.9.0.post0
 pytz==2024.1
