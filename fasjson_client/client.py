@@ -24,12 +24,6 @@ from .response import ResponseWrapper
 from .formats import mask_format
 
 
-class RequestsClientFollowingRedirects(requests_client.RequestsClient):
-    def separate_params(self, request_params):
-        request_params["follow_redirects"] = True
-        return super().separate_params(request_params)
-
-
 class Client:
     """FASJSON client class that builds API methods based on openapi specs.
 
@@ -72,7 +66,7 @@ class Client:
         return urljoin(self._base_url, f"specs/v{self._api_version}.json")
 
     def _make_bravado_client(self):
-        http_client = RequestsClientFollowingRedirects()
+        http_client = requests_client.RequestsClient()
         server_hostname = urlsplit(self._base_url).netloc
         if self._auth:
             http_client.authenticator = GssapiAuthenticator(

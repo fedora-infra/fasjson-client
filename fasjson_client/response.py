@@ -36,9 +36,6 @@ class ResponseWrapper:
         Raises:
             APIError: if the API doesn't return a successful response
         """
-        # Unfortunately this does not work because of
-        # https://github.com/Yelp/bravado/issues/494
-        # kwargs.setdefault("_request_options", {})["follow_redirects"] = True
         try:
             call_result = self.operation(**kwargs).response().result
         except HTTPError as e:
