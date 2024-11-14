@@ -26,5 +26,5 @@ swagger-spec-validator==3.0.4
 toml==0.10.2
 typing-extensions==4.12.2
 urllib3==2.2.3
-webcolors==24.8.0
+webcolors==24.11.1
 zipp==3.21.0
