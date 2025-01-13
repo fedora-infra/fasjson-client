@@ -23,8 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          dnf install -y pre-commit git libpq-devel krb5-devel openldap-devel libffi-devel
-          pip install poetry
+          dnf install -y pre-commit git libpq-devel krb5-devel openldap-devel libffi-devel poetry python3-poetry-plugin-export
 
       - name: Mark the working directory as safe for Git
         run: git config --global --add safe.directory $PWD
