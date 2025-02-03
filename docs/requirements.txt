@@ -1,7 +1,7 @@
 attrs==24.3.0
 bravado-core==6.1.1
 bravado==11.0.3
-certifi==2024.12.14
+certifi==2025.1.31
 chardet==5.2.0
 click==8.1.8
 colorama==0.4.6
