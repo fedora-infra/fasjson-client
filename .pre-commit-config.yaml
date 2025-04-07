@@ -1,0 +1,37 @@
+repos:
+  # Generic hooks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+
+  # https://black.readthedocs.io/en/stable/integrations/source_version_control.html
+  - repo: https://github.com/psf/black
+    rev: 25.1.0
+    hooks:
+      - id: black
+
+  # ruff
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    # ruff version.
+    rev: v0.11.2
+    hooks:
+      - id: ruff
+
+  - repo: https://github.com/myint/rstcheck
+    rev: v6.2.4
+    hooks:
+      - id: rstcheck
+        additional_dependencies: [sphinx, toml, myst-parser]
+
+  - repo: local
+    hooks:
+      - id: liccheck
+        name: liccheck
+        entry: ./devel/run-liccheck.sh
+        files: "(pyproject.toml|poetry.lock)"
+        pass_filenames: false
+        language: script
