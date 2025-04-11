@@ -2094,4 +2094,4 @@ cli = ["click", "cryptography"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.0"
-content-hash = "5b06e2d166dece486496293b1c4535c0c0e7d4eddd1467c178efc6b3bf8dfca9"
+content-hash = "71342f7b15f49e192d772937df4282e96910e76b16fed264e4a5f8cb42840d89"
