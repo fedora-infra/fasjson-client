@@ -15,8 +15,8 @@ repository = "https://github.com/fedora-infra/fasjson-client"
 homepage = "https://github.com/fedora-infra/fasjson-client"
 
 include = [
-  "tox.ini",
-  "config.toml.example",
+  { path = "tox.ini", format = "sdist" },
+  { path = "config.toml.example", format = "sdist" },
 ]
 
 keywords = ['security']
