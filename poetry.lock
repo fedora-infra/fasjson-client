@@ -138,13 +138,12 @@ uvloop = ["uvloop (>=0.15.2)"]
 
 [[package]]
 name = "bravado"
-version = "11.1.0"
+version = "12.0.1"
 description = "Library for accessing Swagger-enabled API's"
 optional = false
-python-versions = "!=3.0,!=3.1,!=3.2,!=3.3,!=3.4,!=3.5.0"
+python-versions = ">=3.8"
 files = [
-    {file = "bravado-11.1.0-py2.py3-none-any.whl", hash = "sha256:a403ef29ec2dda20a855c7c1bd591795d24e16af4fe96e2d7cb3d6edabeba94d"},
-    {file = "bravado-11.1.0.tar.gz", hash = "sha256:f88a6e8a7aa15d947fa8abc8c601cf3da6720b84755254f4a15cfda9419a1990"},
+    {file = "bravado-12.0.1.tar.gz", hash = "sha256:637cc04d53c07e950792595081f9f8bf4dea226ecd1029207cb1d328ea400e20"},
 ]
 
 [package.dependencies]
@@ -156,11 +155,11 @@ pyyaml = "*"
 requests = ">=2.17"
 simplejson = "*"
 six = "*"
-typing-extensions = "*"
+typing_extensions = "*"
 
 [package.extras]
 fido = ["fido (>=4.2.1)"]
-integration-tests = ["bottle", "ephemeral-port-reserve", "pytest"]
+integration-tests = ["bottle", "ephemeral_port_reserve", "pytest"]
 
 [[package]]
 name = "bravado-core"
@@ -2097,4 +2096,4 @@ cli = ["click", "cryptography"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.0"
-content-hash = "adae1e1daa883d13b991d6afd6f3d1fc320cf8e6c9a98cd0218e711be3d26ae4"
+content-hash = "da40df58b9925b9d6f8788c8da9996ee445bcc34cc11d256ef1a66d424a7aea0"
