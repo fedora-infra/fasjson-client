@@ -27,4 +27,4 @@ toml==0.10.2
 typing-extensions==4.13.2
 urllib3==2.4.0
 webcolors==24.11.1
-zipp==3.21.0
+zipp==3.22.0
