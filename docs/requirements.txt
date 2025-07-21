@@ -10,7 +10,7 @@ idna==3.10
 importlib-metadata==8.7.0
 jsonpointer==3.0.0
 jsonref==1.1.0
-jsonschema==4.24.0
+jsonschema==4.24.1
 monotonic==1.6
 msgpack==1.1.1
 pyrsistent==0.20.0
