@@ -22,6 +22,7 @@ srpm_build_deps:
 actions:
     post-upstream-clone:
         - "curl https://src.fedoraproject.org/rpms/python-fasjson-client/raw/main/f/python-fasjson-client.spec -o python-fasjson-client.spec"
+        - "sed -i -e '/^Patch:/d' python-fasjson-client.spec"
         - "sh -c 'curl -sSL https://install.python-poetry.org | python3 -'"
         - "sh -c '~/.local/bin/poetry --version'"
     create-archive:
