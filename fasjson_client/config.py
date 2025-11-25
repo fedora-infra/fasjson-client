@@ -29,7 +29,7 @@ from collections.abc import MutableMapping
 
 try:
     import tomllib
-except ImportError:
+except ImportError:  # pragma: no cover
     # Python < 3.11
     import tomli as tomllib
 

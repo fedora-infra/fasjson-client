@@ -22,17 +22,13 @@ include = [
 keywords = ['security']
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Intended Audience :: Developers",
     "Topic :: Security",
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 
 [tool.poetry.dependencies]
-python = "^3.8.0"
+python = "^3.10.0"
 gssapi = "^1.5.1"
 bravado = "^10.6.0 || ^11 || ^12.0.0"
 requests = "^2.20.0"
@@ -41,7 +37,7 @@ cryptography = {version = ">=2.3", optional = true}
 click = {version = "^6.7 || ^7 || ^8", optional = true}
 tomli = {version = "*", python = "<3.11"}
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 coverage = {version = "*", extras = ["toml"]}
 flake8 = "*"
 pytest = "*"
@@ -53,9 +49,9 @@ sphinxcontrib-httpdomain = "*"
 bandit = "*"
 liccheck = "*"
 black = "*"
-towncrier = "^23.11.0 || ^24.0.0 || ^25.0.0"
-setuptools = "^69.1.0 || ^70.0.0 || ^71.0.0 || ^72.0.0 || ^73.0.0 || ^74.0.0 || ^75.0.0 || ^76.0.0 || ^77.0.0 || ^78.0.0 || ^80.0.0"
-myst-parser = "^2.0.0 || ^3.0.0 || ^4.0.0"
+towncrier = "*"
+setuptools = ">=69.1.0"
+myst-parser = ">=2.0.0"
 
 
 [tool.poetry.extras]
