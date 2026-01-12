@@ -10,7 +10,7 @@ idna==3.11
 importlib-metadata==8.7.1
 jsonpointer==3.0.0
 jsonref==1.1.0
-jsonschema==4.25.1
+jsonschema==4.26.0
 monotonic==1.6
 msgpack==1.1.2
 pyrsistent==0.20.0
@@ -25,6 +25,6 @@ strict-rfc3339==0.7
 swagger-spec-validator==3.0.4
 toml==0.10.2
 typing-extensions==4.15.0
-urllib3==2.6.2
+urllib3==2.6.3
 webcolors==25.10.0
 zipp==3.23.0
