@@ -35,7 +35,6 @@ except ImportError:  # pragma: no cover
 
 from .errors import ConfigurationException
 
-
 _log = logging.getLogger(__name__)
 
 #: The default configuration settings for fasjson-client. This should not be
