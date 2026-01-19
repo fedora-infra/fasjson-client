@@ -22,7 +22,6 @@ from fasjson_client import Client
 from fasjson_client.config import conf
 from fasjson_client.errors import ClientError, APIError
 
-
 KEY_SIZE = 2048
 
 log = logging.getLogger(__name__)

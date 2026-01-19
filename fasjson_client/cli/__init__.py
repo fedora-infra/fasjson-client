@@ -6,7 +6,6 @@ import click
 
 from fasjson_client.config import conf
 
-
 log = logging.getLogger(__name__)
 
 
