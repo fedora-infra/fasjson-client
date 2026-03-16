@@ -24,5 +24,6 @@ poetry export --with dev --without-hashes -f requirements.txt -o $TMPFILE
 
 # Liccheck requires pkg_resources: https://github.com/dhatim/python-license-check/issues/117
 poetry run pip install "setuptools<82.0.0"
+sed -i -e 's/^setuptools==\S\+\(.*\)/setuptools\1/' $TMPFILE  # Needed to avoid version conflicts
 
 poetry run liccheck -r $TMPFILE -s $STRATEGY_TMPFILE
